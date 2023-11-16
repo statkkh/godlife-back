@@ -36,11 +36,11 @@ public class WebSecurityConfig {
             .httpBasic().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests()
-            .antMatchers("/","/api/v1/service/**").permitAll()
-            .antMatchers(HttpMethod.GET,"/api/v1/user/*", "/api/v1/service/*","/file/image/*").permitAll()
+            .antMatchers("/", "/file/**","/api/auth/**", "/api/service/**").permitAll()
+            .antMatchers(HttpMethod.GET,"/api/user/*", "/api/main/home/**","/file/image/*","/api/service/*").permitAll()
             .anyRequest().authenticated().and()
             .exceptionHandling().authenticationEntryPoint(new FailedAuthenticationEntryPoint());
-            
+
         httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
