@@ -11,13 +11,13 @@ import com.godlife.godlifeback.entity.StudyNoticeEntity;
 import lombok.Getter;
 
 @Getter
-public class GetNoticeResponseDto extends ResponseDto{
+public class PostNoticeResponseDto extends ResponseDto{
     
     private int studyNoticeNumber;
     private int studyNumber;
     private String noticeContent;
 
-    private GetNoticeResponseDto(String code, String message, StudyNoticeEntity studyNoticeEntity ){
+    private PostNoticeResponseDto(String code, String message, StudyNoticeEntity studyNoticeEntity ){
         super(code, message);
 
         this.studyNoticeNumber = studyNoticeEntity.getNoticeNumber();
@@ -26,8 +26,8 @@ public class GetNoticeResponseDto extends ResponseDto{
         
     }
 
-    public static ResponseEntity<GetNoticeResponseDto> success(StudyNoticeEntity studyNoticeEntity){
-        GetNoticeResponseDto  result = new GetNoticeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, studyNoticeEntity);
+    public static ResponseEntity<PostNoticeResponseDto> success(StudyNoticeEntity studyNoticeEntity){
+        PostNoticeResponseDto  result = new PostNoticeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, studyNoticeEntity);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
