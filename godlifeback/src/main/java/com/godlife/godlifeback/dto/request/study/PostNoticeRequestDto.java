@@ -10,5 +10,4 @@ import lombok.Setter;
 public class PostNoticeRequestDto {
     @NotBlank
     private String noticeContent;
-    
 }
