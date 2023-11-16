@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.godlife.godlifeback.dto.request.study.PatchNoticeRequestDto;
 import com.godlife.godlifeback.dto.request.study.PostNoticeRequestDto;
 
 import lombok.AllArgsConstructor;
@@ -32,5 +33,10 @@ public class StudyNoticeEntity {
         this.studyNumber = studyNumber;
         this.noticeContent = dto.getNoticeContent();
     }
+
+    public void patchNotice(PatchNoticeRequestDto dto){
+        this.noticeContent = dto.getNoticeContent();
+    }
+
 
 }
