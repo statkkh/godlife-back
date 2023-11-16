@@ -20,4 +20,9 @@ public class PatchNoticeResponseDto extends ResponseDto{
         PatchNoticeResponseDto result = new PatchNoticeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
+
+    public static ResponseEntity<ResponseDto> notExistNotice(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_NOTICE_EXISTS, ResponseMessage.NOT_NOTICE_EXISTS);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
 }

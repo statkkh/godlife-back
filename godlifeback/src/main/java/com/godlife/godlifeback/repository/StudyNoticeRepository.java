@@ -1,9 +1,13 @@
 package com.godlife.godlifeback.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface StudyNoticeRepository {
+import com.godlife.godlifeback.entity.StudyNoticeEntity;
 
-    
+@Repository
+public interface StudyNoticeRepository extends JpaRepository<StudyNoticeEntity, Integer>{
+
+
+    StudyNoticeEntity findByNoticeNumber(Integer noticeNumber);
 }
