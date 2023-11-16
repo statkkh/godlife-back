@@ -12,5 +12,4 @@ public class PatchNoticeRequestDto {
 
     @NotBlank
     private String noticeContent;
-    
 }
