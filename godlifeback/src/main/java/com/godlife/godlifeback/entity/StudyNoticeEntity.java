@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.godlife.godlifeback.dto.request.study.PostNoticeRequestDto;
 
@@ -23,6 +24,8 @@ public class StudyNoticeEntity {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int noticeNumber;
     private int studyNumber;
+    
+    @NotBlank
     private String noticeContent;
 
     public StudyNoticeEntity(PostNoticeRequestDto dto, Integer studyNumber){
