@@ -23,7 +23,6 @@ public class PostNoticeResponseDto extends ResponseDto{
         this.studyNoticeNumber = studyNoticeEntity.getNoticeNumber();
         this.studyNumber = studyNoticeEntity.getStudyNumber();
         this.noticeContent = studyNoticeEntity.getNoticeContent();
-        
     }
 
     public static ResponseEntity<PostNoticeResponseDto> success(StudyNoticeEntity studyNoticeEntity){
