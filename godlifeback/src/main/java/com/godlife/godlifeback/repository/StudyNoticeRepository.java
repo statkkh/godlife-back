@@ -11,9 +11,9 @@ import java.util.List;
 public interface StudyNoticeRepository extends JpaRepository<StudyNoticeListEntity, Integer>{
 
 
-    StudyNoticeListEntity findByNoticeNumber(Integer noticeNumber);
+    StudyNoticeListEntity findByNoticeNumber(Integer studyNoticeNumber);
 
-    List<StudyNoticeListEntity> findByStudyNoticeNumber(Integer studyNoticeNumber);
+    List<StudyNoticeListEntity> findByStudyNoticeNumber(Integer studyNumber);
 
     
 }
