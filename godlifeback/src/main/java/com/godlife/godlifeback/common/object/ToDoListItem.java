@@ -18,7 +18,7 @@ public class ToDoListItem {
     private Boolean studyListCheck;  
 
     public ToDoListItem(StudyToDoListEntity studyToDoListEntity){
-        this.studyListNumber = studyToDoListEntity.getStudyListNumber();
+        this.studyListNumber = studyToDoListEntity.getStudyNumber();
         this.studyNumber = studyToDoListEntity.getStudyNumber();
         this.studyListContent = studyToDoListEntity.getStudyNoticeContent();
 
