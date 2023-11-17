@@ -9,5 +9,5 @@ import com.godlife.godlifeback.entity.StudyNoticeEntity;
 public interface StudyNoticeRepository extends JpaRepository<StudyNoticeEntity, Integer>{
 
 
-    StudyNoticeEntity findByNoticeNumber(Integer noticeNumber);
+    StudyNoticeEntity findByNoticeNumber(Integer studyNoticeNumber);
 }

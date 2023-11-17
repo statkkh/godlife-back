@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import com.godlife.godlifeback.dto.request.study.PatchNoticeRequestDto;
-import com.godlife.godlifeback.dto.request.study.PostNoticeRequestDto;
+import com.godlife.godlifeback.dto.request.study.PatchNoticeListRequestDto;
+import com.godlife.godlifeback.dto.request.study.PostNoticeListRequestDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,19 +23,19 @@ import lombok.Setter;
 @Table(name="study_notice")
 public class StudyNoticeEntity {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int noticeNumber;
+    private int studyNoticeNumber;
     private int studyNumber;
     
     @NotBlank
-    private String noticeContent;
+    private String studyNoticeContent;
 
-    public StudyNoticeEntity(PostNoticeRequestDto dto, Integer studyNumber){
+    public StudyNoticeEntity(PostNoticeListRequestDto dto, Integer studyNumber){
         this.studyNumber = studyNumber;
-        this.noticeContent = dto.getNoticeContent();
+        // this.studyNoticeContent = dto.getstudyNoticeContent();
     }
 
-    public void patchNotice(PatchNoticeRequestDto dto){
-        this.noticeContent = dto.getNoticeContent();
+    public void patchNotice(PatchNoticeListRequestDto dto){
+        // this.studyNoticeContent = dto.getstudyNoticeContent();
     }
 
 

@@ -10,21 +10,19 @@ import com.godlife.godlifeback.dto.response.ResponseMessage;
 import lombok.Getter;
 
 @Getter
-public class DeleteNoticeResponseDto extends ResponseDto{
+public class DeleteToDolistResponseDto extends ResponseDto{
     
-    private DeleteNoticeResponseDto(String code, String message){
+    private DeleteToDolistResponseDto (String code, String message){
         super(code, message);
     }
 
-    public static ResponseEntity<DeleteNoticeResponseDto> success(){
-        DeleteNoticeResponseDto result = new DeleteNoticeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
+    public static ResponseEntity<DeleteToDolistResponseDto> success(){
+        DeleteToDolistResponseDto result = new DeleteToDolistResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    public static ResponseEntity<ResponseDto> notExistNotice(){
-        ResponseDto result = new ResponseDto(ResponseCode.NOT_NOTICE_EXISTS, ResponseMessage.NOT_NOTICE_EXISTS);
+    public static ResponseEntity<ResponseDto> notExistToDoList(){
+        ResponseDto result = new ResponseDto( ResponseCode.NOT_TODOLIST_EXISTS, ResponseMessage.NOT_TODOLIST_EXISTS);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
-
 }
- 

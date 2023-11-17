@@ -3,6 +3,9 @@ package com.godlife.godlifeback.common.object;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import com.godlife.godlifeback.entity.StudyNoticeEntity;
 
 import lombok.Getter;
@@ -12,14 +15,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class NoticeListItem {
-    private int noticeNumber;
+
+    private int studyNoticeNumber;
     private int studyNumber;
-    private String noticeContent;    
+    private String studyNoticeContent;    
 
     public NoticeListItem(StudyNoticeEntity studyNoticeEntity){
-        this.noticeNumber = studyNoticeEntity.getNoticeNumber();
+        this.studyNoticeNumber = studyNoticeEntity.getStudyNoticeNumber();
         this.studyNumber = studyNoticeEntity.getStudyNumber();
-        this.noticeContent = studyNoticeEntity.getNoticeContent();
+        this.studyNoticeContent = studyNoticeEntity.getStudyNoticeContent();
     }
 
     public static List<NoticeListItem> getNoticeList(List<StudyNoticeEntity> studyNoticeEntites){

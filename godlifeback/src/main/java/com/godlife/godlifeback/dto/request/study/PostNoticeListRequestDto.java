@@ -3,11 +3,13 @@ package com.godlife.godlifeback.dto.request.study;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class PostNoticeRequestDto {
+@NoArgsConstructor
+public class PostNoticeListRequestDto {
     @NotBlank
     private String noticeContent;
 }
