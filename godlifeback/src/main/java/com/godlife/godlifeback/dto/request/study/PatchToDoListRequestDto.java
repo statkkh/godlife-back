@@ -12,5 +12,5 @@ import lombok.Setter;
 public class PatchToDoListRequestDto {
     
     @NotBlank
-    private String listContent;
+    private String studyToDolistContent;
 }
