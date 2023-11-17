@@ -12,12 +12,12 @@ import lombok.Getter;
 @Getter
 public class DeleteNoticeListResponseDto extends ResponseDto{
     
-    private DeleteNoticeListResponseDto (String code, String messsage){
-        super(code, messsage);
+    private DeleteNoticeListResponseDto(String code, String message){
+        super(code, message);
     }
 
     public static ResponseEntity<DeleteNoticeListResponseDto> success(){
-        DeleteNoticeListResponseDto result = new DeleteNoticeListResponseDto(ResponseCode.SUCCESS,ResponseMessage.SUCCESS);
+        DeleteNoticeListResponseDto result = new DeleteNoticeListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
@@ -25,4 +25,6 @@ public class DeleteNoticeListResponseDto extends ResponseDto{
         ResponseDto result = new ResponseDto(ResponseCode.NOT_NOTICE_EXISTS, ResponseMessage.NOT_NOTICE_EXISTS);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
+
 }
+ 
