@@ -14,4 +14,6 @@ public interface StudyNoticeRepository extends JpaRepository<StudyNoticeListEnti
     StudyNoticeListEntity findByNoticeNumber(Integer noticeNumber);
 
     List<StudyNoticeListEntity> findByStudyNoticeNumber(Integer studyNoticeNumber);
+
+    
 }
