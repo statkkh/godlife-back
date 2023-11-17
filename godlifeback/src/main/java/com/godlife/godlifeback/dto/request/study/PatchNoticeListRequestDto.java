@@ -1,17 +1,26 @@
 package com.godlife.godlifeback.dto.request.study;
 
 
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
+@NotBlank
 @Setter
 @NoArgsConstructor
 public class PatchNoticeListRequestDto {
 
     @NotBlank
-    private String noticeContent;
+    private List<String> noticeContentList;
+    
+    @NotBlank
+    public  String getNoticeContent() {
+        return null;
+    }
+
+    
 }
