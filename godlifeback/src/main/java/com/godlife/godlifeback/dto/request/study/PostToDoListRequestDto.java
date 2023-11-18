@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PostToDoListRequestDto {
+    
     @NotBlank
     private String studyToDolistContent;
 
