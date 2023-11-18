@@ -26,6 +26,7 @@ public class NoticeListItem {
 
     public static List<NoticeListItem> getNoticeList(List<StudyNoticeEntity> studyNoticeEntites){
         List<NoticeListItem> noticeList = new ArrayList<>();
+        
         for(StudyNoticeEntity studyNoticeEntity :  studyNoticeEntites){
             NoticeListItem noticeListItem = new NoticeListItem(studyNoticeEntity);
             noticeList.add(noticeListItem);
