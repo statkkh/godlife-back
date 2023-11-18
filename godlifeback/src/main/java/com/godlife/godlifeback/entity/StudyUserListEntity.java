@@ -18,6 +18,7 @@ import lombok.Setter;
 public class StudyUserListEntity {
     
     private int studyNumber;
-    private String studyEmail;
+    private String studyUserEmail;
     private String studyGrade;
+
 }    
