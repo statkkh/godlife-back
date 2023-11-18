@@ -21,4 +21,10 @@ public class StudyUserListEntity {
     private String studyUserEmail;
     private String studyGrade;
 
+    public StudyUserListEntity(Integer studyNumber,String email ,String studyGrade){
+
+        this.studyNumber = studyNumber;
+        this.studyUserEmail = email;
+        this.studyGrade = studyGrade;
+    }
 }    
