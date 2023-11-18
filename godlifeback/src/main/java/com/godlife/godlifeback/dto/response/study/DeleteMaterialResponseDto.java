@@ -10,17 +10,16 @@ import com.godlife.godlifeback.dto.response.ResponseMessage;
 import lombok.Getter;
 
 @Getter
-public class PatchMaterialResponseDto extends ResponseDto{
+public class DeleteMaterialResponseDto extends ResponseDto{
     
-    private PatchMaterialResponseDto(String code, String message){
+    private DeleteMaterialResponseDto(String code, String message){
         super(code, message);
     }
 
-    public static ResponseEntity<PatchMaterialResponseDto> success(){
-        PatchMaterialResponseDto result = new PatchMaterialResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+    public static ResponseEntity<DeleteMaterialResponseDto> success(){
+        DeleteMaterialResponseDto result = new DeleteMaterialResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
+        return ResponseEntity.status(HttpStatus.OK).body(result); 
     }
-
 
     public static ResponseEntity<ResponseDto> notExistMaterial(){
         ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_STUDY_MATERIAL, ResponseMessage.NOT_EXIST_STUDY_MATERIAL);
