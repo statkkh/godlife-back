@@ -9,7 +9,7 @@ import com.godlife.godlifeback.common.object.NoticeListItem;
 import com.godlife.godlifeback.dto.response.ResponseCode;
 import com.godlife.godlifeback.dto.response.ResponseDto;
 import com.godlife.godlifeback.dto.response.ResponseMessage;
-import com.godlife.godlifeback.entity.StudyNoticeListEntity;
+import com.godlife.godlifeback.entity.StudyNoticeEntity;
 
 import lombok.Getter;
 
@@ -19,12 +19,12 @@ public class GetNoticeListResponseDto extends ResponseDto{
 
     private List<NoticeListItem> noticeList;        
 
-    private GetNoticeListResponseDto(String code ,String message, List<StudyNoticeListEntity> studyNoticeEntities){
+    private GetNoticeListResponseDto(String code ,String message, List<StudyNoticeEntity> studyNoticeEntities){
         super(code, message);
         this.noticeList = NoticeListItem.getNoticeList(studyNoticeEntities);
     } 
 
-    public static ResponseEntity<GetNoticeListResponseDto> success( List<StudyNoticeListEntity> studyNoticeEntities){
+    public static ResponseEntity<GetNoticeListResponseDto> success( List<StudyNoticeEntity> studyNoticeEntities){
         GetNoticeListResponseDto result = new GetNoticeListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, studyNoticeEntities);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }

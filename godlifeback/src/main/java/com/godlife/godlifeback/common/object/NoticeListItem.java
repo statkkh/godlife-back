@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import com.godlife.godlifeback.entity.StudyNoticeListEntity;
+import com.godlife.godlifeback.entity.StudyNoticeEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,15 +18,15 @@ public class NoticeListItem {
     private int studyNumber;
     private String studyNoticeContent;    
 
-    public NoticeListItem(StudyNoticeListEntity studyNoticeEntity){
+    public NoticeListItem(StudyNoticeEntity studyNoticeEntity){
         this.studyNoticeNumber = studyNoticeEntity.getStudyNoticeNumber();
         this.studyNumber = studyNoticeEntity.getStudyNumber();
         this.studyNoticeContent = studyNoticeEntity.getStudyNoticeContent();
     }
 
-    public static List<NoticeListItem> getNoticeList(List<StudyNoticeListEntity> studyNoticeEntites){
+    public static List<NoticeListItem> getNoticeList(List<StudyNoticeEntity> studyNoticeEntites){
         List<NoticeListItem> noticeList = new ArrayList<>();
-        for(StudyNoticeListEntity studyNoticeEntity :  studyNoticeEntites){
+        for(StudyNoticeEntity studyNoticeEntity :  studyNoticeEntites){
             NoticeListItem noticeListItem = new NoticeListItem(studyNoticeEntity);
             noticeList.add(noticeListItem);
         }
