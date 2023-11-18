@@ -10,5 +10,5 @@ public interface StudyMaterialRepository extends JpaRepository<StudyMaterialEnti
 
     // StudyMaterialEntity findByStudyMaterialNumber(Integer studyMaterilNumber);
     
-    List<StudyMaterialEntity> findByStudyMaterialNumber(Integer studyMaterilNumber);
+    List<StudyMaterialEntity> findByStudyMaterialNumber(Integer studyMaterialNumber);
 } 
