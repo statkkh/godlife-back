@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "user_attendance_information")
@@ -27,12 +28,12 @@ public class UserAttendanceInformationEntity {
     public UserAttendanceInformationEntity(Integer studyNumber, String email){
         Date now = Date.from(Instant.now());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-        String writeDatetime  = simpleDateFormat.format(now);
+        String resisteredWriteDatetime  = simpleDateFormat.format(now);
 
         this.userEmail = email;
         this.studyNumber = studyNumber;
         this.userAttedencaCheck = true;
-        this.ownerAttendanceStart = writeDatetime;
+        this.ownerAttendanceStart = resisteredWriteDatetime;
 
     }
 

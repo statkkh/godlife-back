@@ -18,10 +18,7 @@ public class GetAttendanceInformationResponseDto  extends ResponseDto{
     
     private List<UserAttendanceInformationListItem> attendanceList;
 
-    // private GetAttendanceInformationResponseDto(String code, String message, List<UserAttendanceInformationEntity> userAttendanceInformationEntities){
-    //     super(code, message);
-    //     this.attendanceList = UserAttendanceInformationListItem.get
-    // }
+
     private GetAttendanceInformationResponseDto(String code ,String message, List<UserAttendanceInformationEntity> userAttendanceInformationEntities){
         super(code, message);
         this.attendanceList = UserAttendanceInformationListItem.getUserAttendanceInformationList(userAttendanceInformationEntities);
