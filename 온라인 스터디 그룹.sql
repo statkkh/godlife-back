@@ -1,25 +1,41 @@
 
 
 CREATE TABLE `study` (
-	`study_number`	INT	NOT NULL	COMMENT 'AUTO_INCREMENT',
-	`study_name`	VARCHAR(255)	NOT NULL,
-	`study_start_date`	DATETIME	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	`study_end_date`	DATETIME	NOT NULL,
-	`study_personal`	INT	NOT NULL	DEFAULT 0,
-	`study_category1`	VARCHAR(20)	NOT NULL,
-	`study_category2`	VARCHAR(20)	NULL,
-	`study_category3`	VARCHAR(20)	NULL,
-	`study_public_check`	BOOLEAN	NOT NULL	DEFAULT true,
-	`study_private_password`	VARCHAR(20)	NULL,
-	`study_cover_image_url`	VARCHAR(255)	NULL,
-	`study_next_start_datetime`	DATETIME	NULL,
-	`study_next_end_datetime`	DATETIME	NULL,
-	`study_total_day`	INT	NULL	DEFAULT 0,
-	`create_study_user_email`	VARCHAR(50)	NOT NULL
+	`study_number`	INT	PRIMARY KEY  AUTO_INCREMENT	COMMENT '스터디 방 번호',
+	`study_name`	VARCHAR(255)	NOT NULL COMMENT '스터디 제목',
+	`study_start_date`	DATETIME	NOT NULL	DEFAULT CURRENT_TIMESTAMP COMMENT '스터디 시작일',
+	`study_end_date`	DATETIME	NOT NULL COMMENT '스터디 종료일',
+	`study_personal`	INT	NOT NULL	DEFAULT 0 COMMENT '스터디 인원',
+	`study_category1`	VARCHAR(20)	NOT NULL COMMENT '스터디 카테고리1',
+	`study_category2`	VARCHAR(20)	NULL COMMENT '',
+	`study_category3`	VARCHAR(20)	NULL COMMENT '',
+	`study_public_check`	BOOLEAN	NOT NULL	DEFAULT true COMMENT '스터디 공개 구분',
+	`study_private_password`	VARCHAR(20)	NULL COMMENT '스터디 비공개 비밀번호',
+	`study_cover_image_url`	VARCHAR(255)	NULL COMMENT '스터디 커버 이미지 URL',
+	`study_next_start_datetime`	DATETIME	NULL COMMENT '다음 스터디 시작 시간',
+	`study_next_end_datetime`	DATETIME	NULL COMMENT '다음 스터디 종료 시간',
+	`study_total_day`	INT	NULL DEFAULT 0 COMMENT '총 스터디 일수',
+	`create_study_user_email`	VARCHAR(50)	NOT NULL COMMENT '방 생성 유저 이메일'
 );
 
+DROP TABLE study;
+
+ALTER TABLE study ADD INDEX idx_study_number (study_number);
+
+CREATE TABLE `study_notice` (
+	`study_notice_number`	 INT PRIMARY KEY AUTO_INCREMENT COMMENT '스터디 공지사항 번호',
+	`study_number` INT NOT NULL COMMENT '스터디 방 번호',
+	`study_notice_content` VARCHAR(255)	NULL COMMENT '스터디 공지사항 내용',
+    FOREIGN KEY (`study_number`) REFERENCES study (`study_number`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+DROP TABLE study_notice;
+
+
 CREATE TABLE `study_material` (
-	`study_material_number`	INT	NOT NULL	COMMENT 'AUTO_INCREMENT',
+	`study_material_number`	INT	NOT NULL	COMMENT '스터디 자료 번호',
 	`study_number`	INT	NOT NULL	COMMENT 'AUTO_INCREMENT',
 	`study_material_name`	VARCHAR(50)	NULL,
 	`study_material_image_url`	VARCHAR(500)	NULL,
@@ -47,11 +63,6 @@ CREATE TABLE `user_todolist` (
 	`user_list_check`	BOOLEAN	NOT NULL	DEFAULT false
 );
 
-CREATE TABLE `study_notice` (
-	`study_notice_number`	INT	NOT NULL	COMMENT 'AUTO_INCREMENT',
-	`study_number`	INT	NOT NULL,
-	`study_notice_content`	VARCHAR(255)	NULL
-);
 
 CREATE TABLE `study_todolist` (
 	`study_list_number`	INT PRIMARY KEY AUTO_INCREMENT,

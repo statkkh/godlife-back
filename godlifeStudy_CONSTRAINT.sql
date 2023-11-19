@@ -11,6 +11,8 @@ CREATE TABLE study_material_comment (
 	study_material_comment_content	VARCHAR(255)	NULL,
 	study_material_comment_datetime	DATETIME	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (study_material_number)  REFERENCES study_material (study_material_number)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 
