@@ -25,12 +25,12 @@ public class UserAttendanceInformationListItem {
     }
 
     public static List<UserAttendanceInformationListItem> getUserAttendanceInformationList(List<UserAttendanceInformationEntity> userAttendanceInformationEntities){
-        List<UserAttendanceInformationListItem> list = new ArrayList<>();
+        List<UserAttendanceInformationListItem> userAttendInformationList = new ArrayList<>();
         for(UserAttendanceInformationEntity userAttendanceInformationEntity : userAttendanceInformationEntities){
             UserAttendanceInformationListItem userAttendanceInformationListItem = new UserAttendanceInformationListItem(userAttendanceInformationEntity);
-            list.add(userAttendanceInformationListItem);
+            userAttendInformationList.add(userAttendanceInformationListItem);
         }
         
-        return list;
+        return userAttendInformationList;
     }
 }
