@@ -29,11 +29,11 @@ public class MaterialListItem {
     }
 
     public static List<MaterialListItem> getMaterialList(List<StudyMaterialEntity> studyMaterialEntities){
-        List<MaterialListItem> list = new ArrayList<>();
+        List<MaterialListItem> materailList = new ArrayList<>();
         for(StudyMaterialEntity studyMaterialEntity : studyMaterialEntities){
             MaterialListItem materialListItem = new MaterialListItem(studyMaterialEntity);
-            list.add(materialListItem);
+            materailList.add(materialListItem);
         }
-        return list;
+        return materailList;
     }
 }
