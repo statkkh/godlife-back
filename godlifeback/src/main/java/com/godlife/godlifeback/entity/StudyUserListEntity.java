@@ -27,4 +27,6 @@ public class StudyUserListEntity {
         this.studyUserEmail = email;
         this.studyGrade = studyGrade;
     }
+
+    
 }    
