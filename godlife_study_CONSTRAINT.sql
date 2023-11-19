@@ -126,7 +126,6 @@ CREATE TABLE `study_chat` (
     ON UPDATE CASCADE  ON DELETE CASCADE,
     CONSTRAINT `fk_study_chat_user_idx` FOREIGN KEY (user_email) REFERENCES user(user_email)
     ON UPDATE CASCADE  ON DELETE CASCADE    
-    
 );
 
 DROP TABLE study_chat;

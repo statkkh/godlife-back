@@ -146,3 +146,20 @@ ON U.user_email = SUL.user_email
 INNER JOIN user_attendance_information AS UAI 
 ON U.user_email = UAI.user_email;
 
+SELECT * FROM study_user_list;
+SELECT * FROM study_chat;
+
+SELECT 
+    U.user_email AS user_email,
+    U.user_profile_image_url AS profile_image,
+    U.user_nickname AS user_nickname,
+    SUL.study_grade AS study_grade,
+    SC.study_chat_content
+FROM user AS U
+INNER JOIN study_user_list AS SUL
+ON U.user_email = SUL.user_email
+INNER JOIN study_chat AS SC
+ON U.user_email = SC.user_email
+;
+
+
