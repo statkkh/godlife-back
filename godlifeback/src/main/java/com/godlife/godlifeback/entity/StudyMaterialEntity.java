@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.godlife.godlifeback.dto.request.study.PatchMaterialRequestDto;
 import com.godlife.godlifeback.dto.request.study.PostMaterialRequestDto;
 
 import lombok.AllArgsConstructor;
@@ -42,5 +43,10 @@ public class StudyMaterialEntity {
         this.studyMaterialImageUrl = imageUrl;
         this.studyMaterialWriter = dto.getStudyMaterialWriter();
         this.studyMaterialDatetime = studyMaterialDatetime;
+    }
+
+    public void patchMaterial(PatchMaterialRequestDto dto){
+        this.studyMaterialName = dto.getStudyMaterialName();
+        this.studyMaterialWriter = dto.getStudyMaterialWriter();
     }
 }
