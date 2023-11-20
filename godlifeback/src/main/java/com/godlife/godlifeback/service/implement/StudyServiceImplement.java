@@ -107,7 +107,11 @@ public class StudyServiceImplement implements StudyService{
             boolean existedStudy =   studyRepository.existsByStudyNumber(studyNumber);
             if(!existedStudy) return PostStudyResponseDto.notExistStudy();
 
+            boolean existedUserList = studyUserListRepository.existsByUserEmailAndStudyNumber(studyNumber, userEmail);
+            if(!existedUserList) return GetStudyUserListResponseDto.notUserList();
+
             studyUserListEntities = studyUserListRepository.findByStudyUserList(studyNumber, userEmail);
+            
 
         } catch (Exception exception) {
             exception.printStackTrace();
