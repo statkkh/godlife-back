@@ -17,7 +17,7 @@ public class StudyUserListItem {
 
     public StudyUserListItem(StudyUserListEntity studyUserListEntity){
         this.studyNumber = studyUserListEntity.getStudyNumber();
-        this.studyUserEmail = studyUserListEntity.getStudyUserEmail();
+        this.studyUserEmail = studyUserListEntity.getUserEmail();
         this.studyGrade = studyUserListEntity.getStudyGrade();
     }
 
