@@ -21,6 +21,7 @@ public interface  ResponseCode {
     String NOT_SAFE_PASSWORD = "NSP";
     String NOT_JOIN_USER = "NJ";
     String NOT_EXIST_STUDY_MATERIAL = "NM";
+    String NOT_EXIST_USER_ATTENDANCE_INFORMATION = "NUAI";   
     String NOT_EXIST_USER_LIST = "NUL";
     String NOT_EXIST_STUDY_ROOM = "NS";
     String CANT_STUDY_DATE_MODIFY = "NC";
