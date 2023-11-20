@@ -1,6 +1,7 @@
 package com.godlife.godlifeback.repository.resultSet;
 
-public interface CommentListResultSet {
+public interface StudyCommentListResultSet {
+    String getStudyNumber();
     String getUserGrade();
     String getProfileImage();
     String getNickname();
