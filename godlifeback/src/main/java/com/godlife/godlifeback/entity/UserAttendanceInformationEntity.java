@@ -5,7 +5,11 @@ import java.time.Instant;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
+
+import com.godlife.godlifeback.entity.primaryKey.UserAttendanceInformationListPk;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,9 +22,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity(name = "user_attendance_information")
 @Table(name = "user_attendance_information")
+@IdClass(UserAttendanceInformationListPk.class)
 public class UserAttendanceInformationEntity {
-    
+    @Id
     private int studyNumber;
+    @Id
     private String userEmail;
     private boolean userAttedencaCheck;
     private String ownerAttendanceStart;

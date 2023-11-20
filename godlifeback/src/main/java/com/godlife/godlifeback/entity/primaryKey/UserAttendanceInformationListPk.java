@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserAttendanceInformationPk implements Serializable{
+public class UserAttendanceInformationListPk implements Serializable{
     @Column(name = "study_number")
     private int studyNumber;
     @Column(name = "user_email")
