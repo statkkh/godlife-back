@@ -23,11 +23,13 @@ import com.godlife.godlifeback.dto.request.study.PatchNoticeListRequestDto;
 import com.godlife.godlifeback.dto.response.study.PatchNoticeResponseDto;
 
 import com.godlife.godlifeback.dto.response.study.DeleteNoticeListResponseDto;
+
 import com.godlife.godlifeback.entity.StudyEntity;
 import com.godlife.godlifeback.entity.StudyNoticeEntity;
 import com.godlife.godlifeback.entity.StudyToDoListEntity;
 import com.godlife.godlifeback.entity.StudyUserListEntity;
 import com.godlife.godlifeback.entity.UserAttendanceInformationEntity;
+
 import com.godlife.godlifeback.repository.StudyMaterialCommentRepository;
 import com.godlife.godlifeback.repository.StudyMaterialRepository;
 import com.godlife.godlifeback.repository.StudyNoticeRepository;
@@ -36,9 +38,9 @@ import com.godlife.godlifeback.repository.StudyToDoListRespository;
 import com.godlife.godlifeback.repository.StudyUserListRepository;
 import com.godlife.godlifeback.repository.UserAttendanceInformationRepository;
 import com.godlife.godlifeback.repository.UserRepository;
+import com.godlife.godlifeback.repository.resultSet.UserAttendanceInformationResultset;
 
 import lombok.RequiredArgsConstructor;
-
 @Service
 @RequiredArgsConstructor
 public class StudyServiceImplement implements StudyService{
@@ -54,7 +56,6 @@ public class StudyServiceImplement implements StudyService{
 
     private final StudyRepository studyRepository;
     private final UserRepository userRepository;
-    
 
     @Override
     public ResponseEntity<? super GetNoticeListResponseDto> getNotice(Integer studyNoticeNumber) {
@@ -112,7 +113,6 @@ public class StudyServiceImplement implements StudyService{
 
             studyUserListEntities = studyUserListRepository.findByStudyUserList(studyNumber, userEmail);
             
-
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
@@ -120,6 +120,32 @@ public class StudyServiceImplement implements StudyService{
         return GetStudyUserListResponseDto.success(studyUserListEntities);
     }
 
+    @Override
+    public ResponseEntity<? super GetAttendanceInformationResponseDto> getUserAttendanceInformationList(Integer studyNumber,String userEmail) {
+        
+        List<UserAttendanceInformationResultset> attendanceResultsets = new ArrayList<>();
+
+        try {
+      
+            boolean existedUser = userRepository.existsByEmail(userEmail);
+            if(!existedUser) return PostUserResponseDto.notExistsUser();
+
+            boolean existedStudy = studyRepository.existsByStudyNumber(studyNumber);
+            if(!existedStudy) return PostStudyResponseDto.notExistStudy();
+
+            boolean  existedAttendInformation = userAttendanceInformationRepository.existsByUserEmailAndStudyNumber(studyNumber, userEmail);
+            if(!existedAttendInformation) return GetAttendanceInformationResponseDto.notExistUserAttendanceInformation();
+
+            attendanceResultsets = userAttendanceInformationRepository.findByStudyAttenanceInformationList(studyNumber, userEmail);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return GetAttendanceInformationResponseDto.success(attendanceResultsets);
+    }
+        
     @Override
     public ResponseEntity<? super PostNoticeResponseDto> postNotice(PostNoticeListRequestDto dto, Integer studyNoticeNumber) {
 
@@ -176,13 +202,6 @@ public class StudyServiceImplement implements StudyService{
         return DeleteNoticeListResponseDto.success();
 
     }
-
-
-
-
-
-
-
 
 
 
