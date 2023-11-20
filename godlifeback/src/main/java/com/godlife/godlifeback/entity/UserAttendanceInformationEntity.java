@@ -28,19 +28,19 @@ public class UserAttendanceInformationEntity {
     private int studyNumber;
     @Id
     private String userEmail;
-    private boolean userAttedencaCheck;
+    
+    private String userAttedendanceCheck;
     private String ownerAttendanceStart;
 
-    public UserAttendanceInformationEntity(Integer studyNumber, String email){
+    public UserAttendanceInformationEntity(Integer studyNumber, String email, String userAttedendanceCheck){
         Date now = Date.from(Instant.now());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
         String resisteredWriteDatetime  = simpleDateFormat.format(now);
 
         this.userEmail = email;
         this.studyNumber = studyNumber;
-        this.userAttedencaCheck = true;
+        this.userAttedendanceCheck = userAttedendanceCheck;
         this.ownerAttendanceStart = resisteredWriteDatetime;
-
     }
 
 }

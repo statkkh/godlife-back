@@ -1,8 +1,11 @@
 package com.godlife.godlifeback.repository.resultSet;
 
 public interface UserAttendanceInformationResultset {
-    String getStudyNumber();
+    int getStudyNumber();
+    String getUserEmail();
     String getUserGrade();
-    String getProfileImage();
+    String getUserProfileImage();
+    
     String getNickname();  
+    String getUserAttendanceCheck();
 } 
