@@ -5,7 +5,7 @@ public interface UserAttendanceInformationResultset {
     String getUserEmail();
     String getUserGrade();
     String getUserProfileImage();
-    
     String getNickname();  
     String getUserAttendanceCheck();
+    // String getOwnerAttendanceStart();
 } 

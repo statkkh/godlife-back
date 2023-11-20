@@ -9,24 +9,29 @@ import com.godlife.godlifeback.common.object.UserAttendanceInformationListItem;
 import com.godlife.godlifeback.dto.response.ResponseCode;
 import com.godlife.godlifeback.dto.response.ResponseDto;
 import com.godlife.godlifeback.dto.response.ResponseMessage;
-import com.godlife.godlifeback.entity.UserAttendanceInformationEntity;
+import com.godlife.godlifeback.repository.resultSet.UserAttendanceInformationResultset;
 
 import lombok.Getter;
 
 @Getter
 public class GetAttendanceInformationResponseDto  extends ResponseDto{
     
-    private List<UserAttendanceInformationListItem> attendanceList;
+    private List<UserAttendanceInformationListItem> userAttendanceInformationList;
 
 
-    private GetAttendanceInformationResponseDto(String code ,String message, List<UserAttendanceInformationEntity> userAttendanceInformationEntities){
+    private GetAttendanceInformationResponseDto(String code ,String message, List<UserAttendanceInformationResultset> resultsets){
         super(code, message);
-        this.attendanceList = UserAttendanceInformationListItem.getUserAttendanceInformationList(userAttendanceInformationEntities);
+        this.userAttendanceInformationList = UserAttendanceInformationListItem.getUserAttendanceInformationList(resultsets);
     }
     
-    public static ResponseEntity<GetAttendanceInformationResponseDto> success(List<UserAttendanceInformationEntity> userAttendanceInformationEntities){
-        GetAttendanceInformationResponseDto result = new GetAttendanceInformationResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, userAttendanceInformationEntities);
+    public static ResponseEntity<GetAttendanceInformationResponseDto> success(List<UserAttendanceInformationResultset> resultsets){
+        GetAttendanceInformationResponseDto result = new GetAttendanceInformationResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, resultsets);
         return ResponseEntity.status(HttpStatus.OK).body(result);
         
     }
+
+    public static ResponseEntity<ResponseDto> notExistUserAttendanceInformation(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_USER_ATTENDANCE_INFORMATION, ResponseMessage.NOT_EXIST_USER_ATTENDANCE_INFORMATION);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }    
 }
