@@ -1,6 +1,7 @@
 package com.godlife.godlifeback.dto.request.study;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,9 +11,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PostMaterialRequestDto {
-    @NotBlank
+    @NotBlank @Size(min = 2)
     private String studyMaterialName;
 
-    @NotBlank
+    @NotBlank @Size(min = 2)
     private String studyMaterialWriter;
 }
