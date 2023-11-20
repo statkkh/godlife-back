@@ -16,10 +16,9 @@ import com.godlife.godlifeback.dto.request.study.PostMaterialCommentListRequestD
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "study_material_comment")
