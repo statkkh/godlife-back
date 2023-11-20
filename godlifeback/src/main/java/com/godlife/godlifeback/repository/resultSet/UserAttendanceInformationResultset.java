@@ -1,6 +1,6 @@
 package com.godlife.godlifeback.repository.resultSet;
 
-public interface StudyUserAttendanceListResultset {
+public interface UserAttendanceInformationResultset {
     String getStudyNumber();
     String getUserGrade();
     String getProfileImage();
