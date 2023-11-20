@@ -7,5 +7,5 @@ public interface UserAttendanceInformationResultset {
     String getUserProfileImage();
     String getNickname();  
     String getUserAttendanceCheck();
-    // String getOwnerAttendanceStart();
+    String getOwnerAttendanceStart();
 } 

@@ -5,9 +5,6 @@ import java.util.List;
 
 import com.godlife.godlifeback.repository.resultSet.UserAttendanceInformationResultset;
 
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Date;
 
 
 import lombok.Getter;
@@ -25,24 +22,24 @@ public class UserAttendanceInformationListItem {
     private String ownerAttendanceStart;
 
     public UserAttendanceInformationListItem(UserAttendanceInformationResultset resultSet){
-        Date now = Date.from(Instant.now());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-        String resisteredWriteDatetime = simpleDateFormat.format(now);
+        // Date now = Date.from(Instant.now());
+        // SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        // String resisteredWriteDatetime = simpleDateFormat.format(now);
 
         this.userNickName = resultSet.getNickname();
         this.userEmail = resultSet.getUserEmail();
         this.userProfileImage = resultSet.getUserProfileImage();
         this.userNickName = resultSet.getNickname();
         this.userAttendanceCheck = resultSet.getUserAttendanceCheck();
-        this.ownerAttendanceStart = resisteredWriteDatetime;
+        this.ownerAttendanceStart = resultSet.getOwnerAttendanceStart();
     }
 
     public static List<UserAttendanceInformationListItem> getUserAttendanceInformationList(List<UserAttendanceInformationResultset> resultSets){
-        List<UserAttendanceInformationListItem> userAttendInformationList = new ArrayList<>();
+        List<UserAttendanceInformationListItem> list = new ArrayList<>();
         for(UserAttendanceInformationResultset resultSet : resultSets){
             UserAttendanceInformationListItem userAttendanceInformationListItem = new UserAttendanceInformationListItem(resultSet);
-            userAttendInformationList.add(userAttendanceInformationListItem);
+            list.add(userAttendanceInformationListItem);
         }
-        return userAttendInformationList;
+        return list;
     }
 }
