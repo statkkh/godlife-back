@@ -16,10 +16,8 @@ import com.godlife.godlifeback.dto.request.study.PostMaterialRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "study_material")

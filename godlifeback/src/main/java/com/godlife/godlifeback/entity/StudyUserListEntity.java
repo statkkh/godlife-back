@@ -10,10 +10,8 @@ import com.godlife.godlifeback.entity.primaryKey.StudyUserListPK;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "study_user_list")
