@@ -28,8 +28,8 @@ public interface UserAttendanceInformationRepository extends JpaRepository<UserA
         "ON UAI.user_email = SUL.user_email ",
         nativeQuery =  true
     )
-    boolean existsByUserEmailAndStudyNumber(Integer studyNumber,String userEmail );
+    boolean existsByUserEmailAndStudyNumber(String userEmail, Integer studyNumber);
     
     
-    List<UserAttendanceInformationResultset> findByStudyAttenanceInformationList(Integer studyNumber,String userEmail);
+    List<UserAttendanceInformationResultset> findByStudyAttenanceInformationList(String userEmail, Integer studyNumber);
 }
