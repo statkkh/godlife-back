@@ -1,20 +1,34 @@
 -- 등급이 방장인 사람을 정보를 가지고 있는 코멘트  
+-- 유저등급, 유저프로필이미지,유저닉네임 자료코멘트 , 작성시간
 
+-- 유저리스트에 속하고 스터디 방생성자인 유저
 SELECT 
     U.user_email AS user_email,
     U.user_profile_image_url AS profile_image,
-    SUL.study_grade AS study_grade,
-    SMC.study_material_comment_content AS comment
+    SUL.study_grade AS study_grade
 FROM user AS U
-INNER JOIN study_user_list AS SUL
+INNER JOIN study_user_list AS SULcommentstudy_todolist
 ON U.user_email = SUL.user_email
-INNER JOIN(
-    SELECT study_material_comment_content, user_email
-    FROM study_material_comment
-) AS SMC
-ON U.user_email = SMC.user_email
-WHERE SUL.study_grade = '방장'
-;
+INNER JOIN study AS S
+ON U.user_email = S.create_study_user_email;
+
+-- 스터디 자료 코멘트의  자료번호가 일치하고 스터디 자료가 있는 스터디 방번호가 일치한 
+SELECT SMC.study_material_comment_content AS material_comment_content
+FROM study AS S
+INNER JOIN study_material AS SM
+ON S.study_number = SM.study_number
+INNER JOIN study_material_comment AS SMC
+ON  SM.study_material_number = SMC.study_material_number;
+
+-- INNER JOIN(
+--     SELECT study_material_comment_content, user_email, study_material_comment_number
+--     FROM study_material_comment
+-- ) AS SMC
+-- ON U.user_email = SMC.user_email
+-- WHERE SUL.study_grade = '방장'
+-- ;
+
+
 
 -- 코멘투 유저가  사람을 정보를 가지고 있는 코멘트  
 CREATE VIEW study_user AS
@@ -30,7 +44,7 @@ ON U.user_email = SUL.user_email
 SELECT * FROM study_user;
 
 
--- 유저등급이 방장인 사람의 
+-- 접속유저가 방생성자인 정보
 SELECT 
     S.study_number AS studyNumber,  
     S.create_study_user_email AS email, 
@@ -39,49 +53,51 @@ FROM study AS S
 INNER JOIN study_user_list AS SUL
 ON S.create_study_user_email = SUL.user_email;
 
+-- -- -- -- -- -- notice && user && user_list && study-- -- -- -- -- -- 
 
-SELECT 
-    S.study_number AS studyNumber,  
-    S.create_study_user_email AS email, 
-    SUL.study_grade AS study_grade,
-    SN.study_notice_content AS notice_content
-FROM study AS S 
+-- 공지사항의 스터디 방번호가 유저리스트의 방번호가 일치한   스터디 방 생성자인 유저
+SELECT S.study_number,SN.study_notice_number,SN.study_notice_content
+FROM study AS S
+INNER JOIN User AS U
+ON  S.create_study_user_email = U.user_email
 INNER JOIN study_user_list AS SUL
-ON S.create_study_user_email = SUL.user_email
+ON S.study_number = SUL.study_number AND S.create_study_user_email = SUL.study_number
 INNER JOIN study_notice AS SN
 ON S.study_number = SN.study_number
 ;
 
-SELECT 
-    S.study_number AS studyNumber,  
-    S.create_study_user_email AS email, 
-    SN.study_notice_content AS notice_content
-FROM study AS S 
+-- 공지사항의 스터디 방번호가 유저리스트의 방번호가 일치한  유저
+-- -- -- -- -- --study_user_list&&  notice && study -- -- -- -- -- -- 
+
+SELECT SN.study_notice_number, SUL.study_number,SN.study_notice_content
+FROM study_user_list AS  SUL
+INNER JOIN User AS U
+ON U.user_email = SUL.user_email
 INNER JOIN study_notice AS SN
-ON S.study_number = SN.study_number
+ON	SUL.study_number = SN.study_number
 ;
 
-SELECT 
-    S.study_number AS studyNumber,  
-    S.create_study_user_email AS email, 
-    SUL.study_grade AS study_grade,
-    ST.study_list_content AS notice_content
-FROM study AS S 
+-- 투두의 스터디 방번호가 유저리스트의 방번호가 일치한   스터디 방 생성자인 유저
+SELECT ST.study_list_number, S.study_number,ST.study_list_content, ST.study_list_check
+FROM study AS S
+INNER JOIN User AS U
+ON  S.create_study_user_email = U.user_email
 INNER JOIN study_user_list AS SUL
-ON S.create_study_user_email = SUL.user_email
+ON S.study_number = SUL.study_number AND S.create_study_user_email = SUL.study_number
 INNER JOIN study_todolist AS ST
 ON S.study_number = ST.study_number
 ;
 
-SELECT 
-    S.study_number AS studyNumber,  
-    S.create_study_user_email AS email, 
-    ST.study_list_content AS notice_content
-FROM study AS S 
-INNER JOIN study_todolist AS ST
-ON S.study_number = ST.study_number
-;
+-- 할일  목록의 스터디 방번호가 유저리스트의 방번호가 일치한  유저
+-- -- -- -- -- --study_user_list&&  notice && study -- -- -- -- -- -- 
 
+SELECT ST.study_list_number, SUL.study_number,ST.study_list_content
+FROM study_user_list AS  SUL
+INNER JOIN User AS U
+ON U.user_email = SUL.user_email
+INNER JOIN study_todolist AS ST
+ON	SUL.study_number = ST.study_number
+;
 
 SELECT 
     U.user_email AS user_email,
@@ -132,9 +148,12 @@ INNER JOIN study_user_list AS SUL
 ON U.user_email = SUL.user_email
 ;
 
+-- user && study_user_list && user_attendance_information -- -- -- -- -- 
+-- 유저 등급, 유저 프로필 이미지,유저 닉네임, 스터디 방번호
 
 
 SELECT 
+	UAI.study_number AS study_number,
     U.user_profile_image_url AS profile_image,
     U.user_nickname AS user_nickname,
     SUL.study_grade AS study_grade,
@@ -146,8 +165,20 @@ ON U.user_email = SUL.user_email
 INNER JOIN user_attendance_information AS UAI 
 ON U.user_email = UAI.user_email;
 
-SELECT * FROM study_user_list;
-SELECT * FROM study_chat;
+SELECT 
+UAI.study_number AS study_number,
+SUL.study_grade AS study_grade, 
+U.user_profile_image_url AS user_profile_image,
+U.user_nickname AS nickname
+FROM user_attendance_information AS UAI
+INNER JOIN user AS  U
+ON UAI.user_email = U.user_email
+INNER JOIN study_user_list AS SUL
+ON UAI.user_email = SUL.user_email
+;
+
+
+-- user && study_user_list && study_chat -- -- -- -- -- 
 
 SELECT 
     U.user_email AS user_email,
@@ -163,3 +194,18 @@ ON U.user_email = SC.user_email
 ;
 
 
+-- user && study_user_list && user_attendance_information -- -- -- -- -- 
+
+-- 유저 등급, 유저 프로필 이미지,유저 닉네임, 스터디 방번호
+
+SELECT 
+UAI.study_number AS study_number,
+SUL.study_grade AS study_grade, 
+U.user_profile_image_url AS user_profile_image,
+U.user_nickname AS nickname
+FROM user_attendance_information AS UAI
+INNER JOIN user AS  U
+ON UAI.user_email = U.user_email
+INNER JOIN study_user_list AS SUL
+ON UAI.user_email = SUL.user_email
+;
