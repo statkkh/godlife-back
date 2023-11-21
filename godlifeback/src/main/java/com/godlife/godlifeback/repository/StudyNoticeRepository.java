@@ -10,10 +10,10 @@ import java.util.List;
 @Repository
 public interface StudyNoticeRepository extends JpaRepository<StudyNoticeEntity, Integer>{
 
+    // boolean existsByUserEmailAndStudyNumber(String userEmail, Integer studyNumber);
 
-    StudyNoticeEntity findByNoticeNumber(Integer studyNoticeNumber);
+    StudyNoticeEntity findByStudyNoticeNumber(Integer studyNoticeNumber);
 
-    List<StudyNoticeEntity> findByStudyNoticeNumber(Integer studyNumber);
+    List<StudyNoticeEntity> findByStudyNumber(Integer studyNumber);
 
-    
 }
