@@ -25,4 +25,9 @@ public class DeleteToDolistResponseDto extends ResponseDto{
         ResponseDto result = new ResponseDto( ResponseCode.NOT_TODOLIST_EXISTS, ResponseMessage.NOT_TODOLIST_EXISTS);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
+
+    public static ResponseEntity<ResponseDto> misMatchLeaderEmail(){
+        ResponseDto result = new ResponseDto(ResponseCode.MISMATCH_LEADER_EMAIL, ResponseMessage.MISMATCH_LEADER_EMAIL);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
 }
