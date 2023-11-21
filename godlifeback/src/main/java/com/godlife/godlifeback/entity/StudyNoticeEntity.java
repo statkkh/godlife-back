@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import com.godlife.godlifeback.dto.request.study.PatchNoticeRequestDto;
-import com.godlife.godlifeback.dto.request.study.PostNoticeListRequestDto;
+import com.godlife.godlifeback.dto.request.study.PostNoticeRequestDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +27,7 @@ public class StudyNoticeEntity {
     @NotBlank
     private String studyNoticeContent;
 
-    public StudyNoticeEntity(PostNoticeListRequestDto dto, Integer studyNumber){
+    public StudyNoticeEntity(PostNoticeRequestDto dto, Integer studyNumber){
         this.studyNumber = studyNumber;
         this.studyNoticeContent = dto.getNoticeContent();
     }
