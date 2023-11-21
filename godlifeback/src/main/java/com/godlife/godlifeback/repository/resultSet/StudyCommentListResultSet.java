@@ -2,14 +2,14 @@ package com.godlife.godlifeback.repository.resultSet;
 
 public interface StudyCommentListResultSet {
     // int getStudyNumber();
-    int studyMaterialCommentNumber();
-    int studyMaterialNumber();
-
+    // String getUserEmail();
     String getUserGrade();
     String getUserProfileImage();
     String getNickname();
+
+    int studyMaterialCommentNumber();
+    int studyMaterialNumber();
     
-    String getUserEmail();
-    String getContent();
     String getWriteDatetime();
+    String getContent();
 } 
