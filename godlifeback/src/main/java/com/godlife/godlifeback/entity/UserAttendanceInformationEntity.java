@@ -37,8 +37,8 @@ public class UserAttendanceInformationEntity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
         String resisteredWriteDatetime  = simpleDateFormat.format(now);
 
-        this.userEmail = email;
         this.studyNumber = studyNumber;
+        this.userEmail = email;
         this.userAttedendanceCheck = userAttedendanceCheck;
         this.ownerAttendanceStart = resisteredWriteDatetime;
     }
