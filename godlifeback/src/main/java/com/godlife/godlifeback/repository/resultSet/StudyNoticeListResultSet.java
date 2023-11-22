@@ -4,5 +4,10 @@ public interface StudyNoticeListResultSet {
     int getStudyNoticeNumber();
     int getStudyNumber();
     String studyNoticeContent();
-    // String userEmail();
+    // String userEmail();resultSet
+
 } 
+
+    // public void patchNotice(PatchNoticeRequestDto dto){
+    //     this.studyNoticeContent = dto.getNoticeContent();
+    // }

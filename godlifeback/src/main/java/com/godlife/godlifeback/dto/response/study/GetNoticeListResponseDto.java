@@ -14,18 +14,18 @@ import com.godlife.godlifeback.repository.resultSet.StudyNoticeListResultSet;
 import lombok.Getter;
 
 @Getter
-public class GetNoticeResponseDto extends ResponseDto{
+public class GetNoticeListResponseDto extends ResponseDto{
     
 
     private List<NoticeListItem> noticeList;        
 
-    private GetNoticeResponseDto(String code ,String message, List<StudyNoticeListResultSet> resultSets){
+    private GetNoticeListResponseDto(String code ,String message, List<StudyNoticeListResultSet> resultSets){
         super(code, message);
         this.noticeList = NoticeListItem.getNoticeList(resultSets);
     } 
 
-    public static ResponseEntity<GetNoticeResponseDto> success( List<StudyNoticeListResultSet> resultSets){
-        GetNoticeResponseDto result = new GetNoticeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, resultSets);
+    public static ResponseEntity<GetNoticeListResponseDto> success( List<StudyNoticeListResultSet> resultSets){
+        GetNoticeListResponseDto result = new GetNoticeListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, resultSets);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
@@ -34,8 +34,15 @@ public class GetNoticeResponseDto extends ResponseDto{
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }    
 
+    public static ResponseEntity<ResponseDto> notExistUser(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_USER, ResponseMessage.NOT_EXIST_USER);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }    
+
     public static ResponseEntity<ResponseDto> notExistStudy(){
         ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_STUDY_ROOM, ResponseMessage.NOT_EXIST_STUDY_ROOM);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
-    }            
+    }    
+    
+    
 }

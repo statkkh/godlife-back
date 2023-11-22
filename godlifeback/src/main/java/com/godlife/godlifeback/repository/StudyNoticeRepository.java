@@ -19,9 +19,9 @@ public interface StudyNoticeRepository extends JpaRepository<StudyNoticeEntity, 
     @Query(
         value =
         "SELECT " +
-            "SN.study_notice_number AS study_notice_number"+
-            "SUL.study_number AS study_number" +
-            "SN.study_notice_content AS study_notice_content" +
+            "SN.study_notice_number AS study_notice_number, " +
+            "SUL.study_number AS study_number, " +
+            "SN.study_notice_content AS study_notice_content " +
         "FROM study_user_list AS  SUL "+    
         "INNER JOIN User AS U " +
         "ON U.user_email = SUL.user_email " +
@@ -30,6 +30,7 @@ public interface StudyNoticeRepository extends JpaRepository<StudyNoticeEntity, 
         nativeQuery = true  
     )
     
+    List<StudyNoticeListResultSet> findByNoticeList(Integer studyNumber);
     // SELECT SN.study_notice_number, SUL.study_number,SN.study_notice_content
     // FROM study_user_list AS  SUL
     // INNER JOIN User AS U
@@ -39,10 +40,8 @@ public interface StudyNoticeRepository extends JpaRepository<StudyNoticeEntity, 
     // ;
 
         
-
-    // StudyNoticeEntity findByStudyNoticeNumber(Integer studyNoticeNumsber);
-
-    List<StudyNoticeListResultSet> findByNoticeList(Integer studyNumber);
+    
+    StudyNoticeEntity findByStudyNumber(Integer studyNumber);
 
     // boolean existsByStudyNoticeNumber(Integer studyNoticeNumber);
 
