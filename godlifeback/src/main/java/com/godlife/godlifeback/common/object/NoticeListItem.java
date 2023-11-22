@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import com.godlife.godlifeback.entity.StudyNoticeEntity;
+import com.godlife.godlifeback.repository.resultSet.StudyNoticeListResultSet;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,22 +16,25 @@ public class NoticeListItem {
 
     private int studyNoticeNumber;
     private int studyNumber;
-    private String studyNoticeContent;    
+    private String studyNoticeContent;
+    private String userEmail;    
 
-    public NoticeListItem(StudyNoticeEntity studyNoticeEntity){
-        this.studyNoticeNumber = studyNoticeEntity.getStudyNoticeNumber();
-        this.studyNumber = studyNoticeEntity.getStudyNumber();
-        this.studyNoticeContent = studyNoticeEntity.getStudyNoticeContent();
+    public NoticeListItem(StudyNoticeListResultSet resultSet){
+        this.studyNoticeNumber = resultSet.getStudyNoticeNumber();
+        this.studyNumber = resultSet.getStudyNumber();
+        this.studyNoticeContent = resultSet.studyNoticeContent();
+        this.userEmail = resultSet.userEmail();
     }
 
-    public static List<NoticeListItem> getNoticeList(List<StudyNoticeEntity> studyNoticeEntites){
-        List<NoticeListItem> noticeList = new ArrayList<>();
+    public static List<NoticeListItem> getNoticeList(List<StudyNoticeListResultSet> resultSets){
+        List<NoticeListItem> list = new ArrayList<>();
         
-        for(StudyNoticeEntity studyNoticeEntity :  studyNoticeEntites){
-            NoticeListItem noticeListItem = new NoticeListItem(studyNoticeEntity);
-            noticeList.add(noticeListItem);
+        for(StudyNoticeListResultSet resultSet :  resultSets){
+            NoticeListItem noticeListItem = new NoticeListItem(resultSet);
+            list.add(noticeListItem);
         }
-        return noticeList;
+        
+        return list;
     }    
 
     

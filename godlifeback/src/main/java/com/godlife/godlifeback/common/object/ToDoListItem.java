@@ -3,7 +3,7 @@ package com.godlife.godlifeback.common.object;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.godlife.godlifeback.entity.StudyToDoListEntity;
+import com.godlife.godlifeback.repository.resultSet.StudyToDoListResultSet;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,21 +15,25 @@ public class ToDoListItem {
     private int studyListNumber;
     private int studyNumber;
     private String studyListContent;
-    private Boolean studyListCheck;  
+    private Boolean studyListCheck; 
+    private String userEmail;  
 
-    public ToDoListItem(StudyToDoListEntity studyToDoListEntity){
-        this.studyListNumber = studyToDoListEntity.getStudyNumber();
-        this.studyNumber = studyToDoListEntity.getStudyNumber();
-        this.studyListContent = studyToDoListEntity.getStudyNoticeContent();
-
+    public ToDoListItem(StudyToDoListResultSet resultSet){
+        this.studyListNumber = resultSet.getStudyListNumber();
+        this.studyNumber = resultSet.getStudyNumber();
+        this.studyListContent = resultSet.getStudyListContent();
+        this.studyListCheck = resultSet.getStudyListCheck();
+        this.userEmail = resultSet.userEmail();
     }
 
-    public static List<ToDoListItem> getToDoList(List<StudyToDoListEntity> studyToDoListEntities){
-        List<ToDoListItem> todoList = new ArrayList<>();
-        for(StudyToDoListEntity studyToDoListEntity : studyToDoListEntities){
-            ToDoListItem toDoListItem = new ToDoListItem(studyToDoListEntity);
-            todoList.add(toDoListItem);
+    public static List<ToDoListItem> getToDoList(List<StudyToDoListResultSet> resultSets){
+        List<ToDoListItem> list = new ArrayList<>();
+
+        for(StudyToDoListResultSet resultSet : resultSets){
+            ToDoListItem toDoListItem = new ToDoListItem(resultSet);
+            list.add(toDoListItem);
         }
-        return todoList;
+        
+        return list;
     }
 }
