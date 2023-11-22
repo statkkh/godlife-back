@@ -10,14 +10,14 @@ import com.godlife.godlifeback.dto.response.ResponseMessage;
 import lombok.Getter;
 
 @Getter
-public class DeleteNoticeListResponseDto extends ResponseDto{
+public class DeleteNoticeResponseDto extends ResponseDto{
     
-    private DeleteNoticeListResponseDto(String code, String message){
+    private DeleteNoticeResponseDto(String code, String message){
         super(code, message);
     }
 
-    public static ResponseEntity<DeleteNoticeListResponseDto> success(){
-        DeleteNoticeListResponseDto result = new DeleteNoticeListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
+    public static ResponseEntity<DeleteNoticeResponseDto> success(){
+        DeleteNoticeResponseDto result = new DeleteNoticeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
