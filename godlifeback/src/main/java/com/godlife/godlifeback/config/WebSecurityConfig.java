@@ -33,11 +33,12 @@ public class WebSecurityConfig {
 
         httpSecurity
             .cors().and()
+            .csrf().disable()
             .httpBasic().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests()
-            .antMatchers("/", "/file/**","/api/auth/**", "/api/service/**").permitAll()
-            .antMatchers(HttpMethod.GET,"/api/user/*", "/api/main/home/**","/file/image/*","/api/service/*").permitAll()
+            .antMatchers("/", "/file/**", "/api/auth/**" ).permitAll()
+            // .antMatchers(HttpMethod.GET,"/api/user/*", "/api/main/home/**","/file/image/*","/api/service/*").permitAll()
             .anyRequest().authenticated().and()
             .exceptionHandling().authenticationEntryPoint(new FailedAuthenticationEntryPoint());
 
