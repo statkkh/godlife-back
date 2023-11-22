@@ -4,5 +4,5 @@ public interface StudyNoticeListResultSet {
     int getStudyNoticeNumber();
     int getStudyNumber();
     String studyNoticeContent();
-    String userEmail();
+    // String userEmail();
 } 

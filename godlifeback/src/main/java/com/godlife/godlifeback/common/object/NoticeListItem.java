@@ -17,13 +17,13 @@ public class NoticeListItem {
     private int studyNoticeNumber;
     private int studyNumber;
     private String studyNoticeContent;
-    private String userEmail;    
+
 
     public NoticeListItem(StudyNoticeListResultSet resultSet){
         this.studyNoticeNumber = resultSet.getStudyNoticeNumber();
         this.studyNumber = resultSet.getStudyNumber();
         this.studyNoticeContent = resultSet.studyNoticeContent();
-        this.userEmail = resultSet.userEmail();
+        // this.userEmail = resultSet.userEmail();
     }
 
     public static List<NoticeListItem> getNoticeList(List<StudyNoticeListResultSet> resultSets){

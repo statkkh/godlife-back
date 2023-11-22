@@ -23,13 +23,15 @@ public class StudyNoticeEntity {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int studyNoticeNumber;
     private int studyNumber;
-    
+    private String userEmail;
+
     @NotBlank
     private String studyNoticeContent;
 
-    public StudyNoticeEntity(PostNoticeRequestDto dto, Integer studyNumber){
+    public StudyNoticeEntity(PostNoticeRequestDto dto, Integer studyNumber,String userEmail){
         this.studyNumber = studyNumber;
         this.studyNoticeContent = dto.getNoticeContent();
+        this.userEmail = userEmail;
     }
 
     public void patchNotice(PatchNoticeRequestDto dto){
