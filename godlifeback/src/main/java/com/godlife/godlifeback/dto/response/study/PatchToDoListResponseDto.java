@@ -22,10 +22,20 @@ public class PatchToDoListResponseDto extends ResponseDto{
    }
 
    public static ResponseEntity<ResponseDto> notExistToDolist(){
-    ResponseDto result = new PatchToDoListResponseDto(ResponseCode.NOT_TODOLIST_EXISTS, ResponseMessage.NOT_TODOLIST_EXISTS);
+    ResponseDto result = new PatchToDoListResponseDto(ResponseCode.NOT_EXIST_TODOLIST, ResponseMessage.NOT_EXIST_TODOLIST);
     return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
    }
 
+    public static ResponseEntity<ResponseDto> notExistUser(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_USER, ResponseMessage.NOT_EXIST_USER);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
+
+    public static ResponseEntity<ResponseDto> notExistStudy(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_STUDY_ROOM, ResponseMessage.NOT_EXIST_STUDY_ROOM);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
+   
    public static ResponseEntity<ResponseDto> misMatchLeaderEmail(){
         ResponseDto result = new ResponseDto(ResponseCode.MISMATCH_LEADER_EMAIL,ResponseMessage.MISMATCH_LEADER_EMAIL);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);

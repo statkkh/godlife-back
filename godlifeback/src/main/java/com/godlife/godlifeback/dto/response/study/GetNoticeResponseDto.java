@@ -30,7 +30,7 @@ public class GetNoticeResponseDto extends ResponseDto{
     }
 
     public static ResponseEntity<ResponseDto> notExistNotice(){
-        ResponseDto result = new ResponseDto(ResponseCode.NOT_NOTICE_EXISTS, ResponseMessage.NOT_NOTICE_EXISTS);
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_NOTICE, ResponseMessage.NOT_EXIST_NOTICE);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }    
 

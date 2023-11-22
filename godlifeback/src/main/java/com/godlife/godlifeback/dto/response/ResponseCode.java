@@ -26,8 +26,9 @@ public interface  ResponseCode {
     String NOT_EXIST_STUDY_ROOM = "NS";
     String CANT_STUDY_DATE_MODIFY = "NC";
 
-    String NOT_NOTICE_EXISTS = "NN";
-    String NOT_TODOLIST_EXISTS = "SLN";
-    String NOT_MATERIAL_EXISTS = "SMCN";
+    String NOT_EXIST_NOTICE = "NN";
+    String NOT_EXIST_TODOLIST = "SLN";
+    String NOT_EXIST_MATERIAL = "SMCN";
+    String MISMATCH_LEADER_EMAIL = "MLE";
 
 }

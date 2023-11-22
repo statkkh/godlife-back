@@ -29,7 +29,7 @@ public class GetToDoListResponseDto extends ResponseDto{
     }
 
     public static ResponseEntity<ResponseDto> notExistToDoList(){
-        ResponseDto result = new ResponseDto( ResponseCode.NOT_TODOLIST_EXISTS, ResponseMessage.NOT_TODOLIST_EXISTS);
+        ResponseDto result = new ResponseDto( ResponseCode.NOT_EXIST_TODOLIST, ResponseMessage.NOT_EXIST_TODOLIST);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
 

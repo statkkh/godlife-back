@@ -16,19 +16,29 @@ import lombok.Getter;
 @Getter
 public class PatchNoticeResponseDto extends ResponseDto{
 
-    private List<NoticeListItem> noticeList;  
+    // private List<NoticeListItem> noticeList;  
 
-    private PatchNoticeResponseDto(String code, String message, List<StudyNoticeEntity> studyNoticeEntities){
+    private PatchNoticeResponseDto(String code, String message){
         super(code, message);
     }
 
-    public static ResponseEntity<PatchNoticeResponseDto> success(List<StudyNoticeEntity> studyNoticeEntities){
-        PatchNoticeResponseDto result = new PatchNoticeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, studyNoticeEntities);
+    public static ResponseEntity<PatchNoticeResponseDto> success(){
+        PatchNoticeResponseDto result = new PatchNoticeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     public static ResponseEntity<ResponseDto> notExistNotice(){
-        ResponseDto result = new ResponseDto(ResponseCode.NOT_NOTICE_EXISTS, ResponseMessage.NOT_NOTICE_EXISTS);
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_NOTICE, ResponseMessage.NOT_EXIST_NOTICE);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
+
+    public static ResponseEntity<ResponseDto> notExistUser(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_USER, ResponseMessage.NOT_EXIST_USER);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
+
+    public static ResponseEntity<ResponseDto> notExistStudy(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_STUDY_ROOM, ResponseMessage.NOT_EXIST_STUDY_ROOM);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
 

@@ -16,22 +16,32 @@ import lombok.Getter;
 @Getter
 public class PostNoticeResponseDto extends ResponseDto{
     
-    private List<NoticeListItem> noticeList;
+    // private List<NoticeListItem> noticeList;
 
-    private PostNoticeResponseDto(String code, String message, List<StudyNoticeEntity> studyNoticeEntities){
+    private PostNoticeResponseDto(String code, String message){
         super(code, message);
     }
 
-    public static ResponseEntity<PostNoticeResponseDto> success(List<StudyNoticeEntity> studyNoticeEntities){
-        PostNoticeResponseDto  result = new PostNoticeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, studyNoticeEntities);
+    public static ResponseEntity<PostNoticeResponseDto> success(){
+        PostNoticeResponseDto  result = new PostNoticeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    public static ResponseEntity<ResponseDto> notExistNotice(){
-        ResponseDto result = new ResponseDto(ResponseCode.NOT_NOTICE_EXISTS, ResponseMessage.NOT_NOTICE_EXISTS);
+    public static ResponseEntity<ResponseDto> notExistsNotice(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_NOTICE, ResponseMessage.NOT_EXIST_NOTICE);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
-
+    
+    public static ResponseEntity<ResponseDto> notExistsUser(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_USER, ResponseMessage.NOT_EXIST_USER);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
+    
+    public static ResponseEntity<ResponseDto> notExistsStudy(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_STUDY_ROOM, ResponseMessage.NOT_EXIST_STUDY_ROOM);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
+    
     public static ResponseEntity<ResponseDto> mistMatchLeaderEmail(){
         ResponseDto result = new ResponseDto(ResponseCode.MISMATCH_LEADER_EMAIL, ResponseMessage.MISMATCH_LEADER_EMAIL);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);

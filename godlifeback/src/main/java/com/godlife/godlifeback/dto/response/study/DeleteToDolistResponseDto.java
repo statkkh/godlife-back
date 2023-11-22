@@ -22,8 +22,18 @@ public class DeleteToDolistResponseDto extends ResponseDto{
     }
 
     public static ResponseEntity<ResponseDto> notExistToDoList(){
-        ResponseDto result = new ResponseDto( ResponseCode.NOT_TODOLIST_EXISTS, ResponseMessage.NOT_TODOLIST_EXISTS);
+        ResponseDto result = new ResponseDto( ResponseCode.NOT_EXIST_TODOLIST, ResponseMessage.NOT_EXIST_TODOLIST);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
+
+    public static ResponseEntity<ResponseDto> notExistUser(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_USER, ResponseMessage.NOT_EXIST_USER);
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(result);
+    }
+
+    public static ResponseEntity<ResponseDto> notExistStudy(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_STUDY_ROOM, ResponseMessage.NOT_EXIST_STUDY_ROOM);
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(result);
     }
 
     public static ResponseEntity<ResponseDto> misMatchLeaderEmail(){

@@ -34,4 +34,15 @@ public class GetAttendanceInformationResponseDto  extends ResponseDto{
         ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_USER_ATTENDANCE_INFORMATION, ResponseMessage.NOT_EXIST_USER_ATTENDANCE_INFORMATION);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }    
+
+
+    public static ResponseEntity<ResponseDto> notExistUser(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_USER, ResponseMessage.NOT_EXIST_USER);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
+
+    public static ResponseEntity<ResponseDto> notExistStudy(){
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_STUDY_ROOM, ResponseMessage.NOT_EXIST_STUDY_ROOM);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
 }
