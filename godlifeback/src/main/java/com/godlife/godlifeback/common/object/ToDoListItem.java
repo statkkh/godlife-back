@@ -16,14 +16,14 @@ public class ToDoListItem {
     private int studyNumber;
     private String studyListContent;
     private Boolean studyListCheck; 
-    private String userEmail;  
+
 
     public ToDoListItem(StudyToDoListResultSet resultSet){
         this.studyListNumber = resultSet.getStudyListNumber();
         this.studyNumber = resultSet.getStudyNumber();
         this.studyListContent = resultSet.getStudyListContent();
         this.studyListCheck = resultSet.getStudyListCheck();
-        this.userEmail = resultSet.userEmail();
+        // this.userEmail = resultSet.userEmail();
     }
 
     public static List<ToDoListItem> getToDoList(List<StudyToDoListResultSet> resultSets){
@@ -33,7 +33,7 @@ public class ToDoListItem {
             ToDoListItem toDoListItem = new ToDoListItem(resultSet);
             list.add(toDoListItem);
         }
-        
+
         return list;
     }
 }
