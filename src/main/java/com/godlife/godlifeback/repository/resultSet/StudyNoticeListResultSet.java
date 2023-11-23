@@ -7,7 +7,3 @@ public interface StudyNoticeListResultSet {
     String getUserEmail();
 
 } 
-
-    // public void patchNotice(PatchNoticeRequestDto dto){
-    //     this.studyNoticeContent = dto.getNoticeContent();
-    // }
