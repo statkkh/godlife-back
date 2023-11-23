@@ -4,6 +4,6 @@ public interface StudyToDoListResultSet {
     int getStudyListNumber();     
     int getStudyNumber();
     String getStudyListContent();
-    boolean getStudtListCheck();
-    String userEmail();
+    boolean getStudyListCheck();
+    // String userEmail();
 }
