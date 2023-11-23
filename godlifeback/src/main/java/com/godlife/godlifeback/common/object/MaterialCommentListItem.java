@@ -22,14 +22,12 @@ public class MaterialCommentListItem {
     private String userProfileImage;
     private String userNickName;
 
-    private String userEmail;
+    // private String userEmail;
     private String studyMaterialComment;
     private String studyMaterialCommentDatetime;
 
     public MaterialCommentListItem(StudyCommentListResultSet resultSet){
         
-        Date now = Date.from(Instant.now());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
 
         // this.studyNumber = resultSet.getStudyNumber();
         this.studyMaterialComentNumber  = resultSet.studyMaterialCommentNumber();
@@ -39,7 +37,7 @@ public class MaterialCommentListItem {
         this.userProfileImage = resultSet.getUserProfileImage();
         this.userNickName = resultSet.getNickname();
 
-        this.userEmail = resultSet.getUserEmail();
+        // this.userEmail = resultSet.getUserEmail();
         this.studyMaterialComment = resultSet.getContent();
         this.studyMaterialCommentDatetime = resultSet.getWriteDatetime();
     }
