@@ -14,8 +14,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserAttendanceInformationListPk implements Serializable{
-    @Column(name = "study_number")
-    private int studyNumber;
     @Column(name = "user_email")
     private String userEmail;
+    @Column(name = "study_number")
+    private int studyNumber;
 }
