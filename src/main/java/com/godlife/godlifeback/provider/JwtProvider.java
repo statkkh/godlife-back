@@ -6,6 +6,8 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -26,9 +28,24 @@ public class JwtProvider {
     }
 
     public String validate(String jwt){
-        
-        return secretkey;
 
+        String email = null;
+
+        try {
+            
+            Claims claims = Jwts.parser()
+                                .setSigningKey(secretkey)
+                                .parseClaimsJws(jwt)
+                                .getBody();
+
+            email = claims.getSubject();
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return null;
+        }
+        
+        return email;
     }
     
 }
