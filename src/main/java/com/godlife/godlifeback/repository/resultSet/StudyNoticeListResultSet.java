@@ -5,5 +5,4 @@ public interface StudyNoticeListResultSet {
     int getStudyNumber();
     String getStudyNoticeContent();
     String getUserEmail();
-
 } 
