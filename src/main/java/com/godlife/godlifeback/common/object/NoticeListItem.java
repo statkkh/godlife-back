@@ -25,7 +25,6 @@ public class NoticeListItem {
         this.studyNumber = resultSet.getStudyNumber();
         this.studyNoticeContent = resultSet.getStudyNoticeContent();
         this.userEmail = resultSet.getUserEmail();
-        // this.userEmail = resultSet.userEmail();
     }
 
     public static List<NoticeListItem> getNoticeList(List<StudyNoticeListResultSet> resultSets){
