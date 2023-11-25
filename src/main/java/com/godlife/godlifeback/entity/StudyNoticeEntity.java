@@ -25,7 +25,6 @@ public class StudyNoticeEntity {
     private int studyNoticeNumber;
     private int studyNumber;
 
-    // @NotBlank
     private String studyNoticeContent;
 
     public StudyNoticeEntity(PostNoticeRequestDto dto, Integer studyNumber){
