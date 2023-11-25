@@ -11,7 +11,7 @@ public interface  ResponseCode {
     String DUPLICATED_CATEGORY = "DC";    
     String NOT_EXIST_USER = "NU";
     
-    
+    String NO_PERMISSION = "NP";
     String SIGN_IN_FAILED = "SF";
     String PASS_FAILED =  "CPE";
     

@@ -13,7 +13,8 @@ public interface  ResponseMessage {
 
     String SIGN_IN_FAILED = "Login information mismatch";
     String PASS_FAILED = "Confirm Password error.";
-
+    String NO_PERMISSION = "Do not have permission.";
+    
     String DATABASE_ERROR = "DataBase error.";
 
     String EMAIL_NOT_FOUND="Email not found.";
