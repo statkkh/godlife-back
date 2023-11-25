@@ -36,6 +36,4 @@ public class StudyEntity {
     @NotNull
     private int studyTotalDay;
     private String createStudyUserEmail;
-
-    
 }
