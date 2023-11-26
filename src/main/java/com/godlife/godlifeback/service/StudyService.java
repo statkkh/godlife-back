@@ -1,13 +1,13 @@
 package com.godlife.godlifeback.service;
 
 
-import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 
 import com.godlife.godlifeback.dto.response.study.GetStudyNoticeListResponseDto;
 import com.godlife.godlifeback.dto.request.study.PostNoticeRequestDto;
 import com.godlife.godlifeback.dto.response.study.PostNoticeResponseDto;
+import com.godlife.godlifeback.dto.request.study.PatchMaterialCommentReqeuestDto;
 import com.godlife.godlifeback.dto.request.study.PatchMaterialRequestDto;
 import com.godlife.godlifeback.dto.request.study.PatchNoticeRequestDto;
 import com.godlife.godlifeback.dto.response.study.PatchNoticeResponseDto;
@@ -18,7 +18,9 @@ import com.godlife.godlifeback.dto.response.study.GetToDoListResponseDto;
 import com.godlife.godlifeback.dto.request.study.PostToDoListRequestDto;
 import com.godlife.godlifeback.dto.response.study.PostToDoListResponseDto;
 import com.godlife.godlifeback.dto.request.study.PatchToDoListRequestDto;
+import com.godlife.godlifeback.dto.request.study.PostMaterialCommentRequestDto;
 import com.godlife.godlifeback.dto.response.study.PatchToDoListResponseDto;
+import com.godlife.godlifeback.dto.response.study.PostMaterialCommentResponseDto;
 import com.godlife.godlifeback.dto.response.study.DeleteToDolistResponseDto;
 
 
@@ -49,6 +51,9 @@ public interface StudyService {
     ResponseEntity<? super PatchMaterialResponseDto> patchMaterial(PatchMaterialRequestDto dto,String createStudyUserEmail,Integer studyNumber, Integer studyMaterialNumber);
     ResponseEntity<? super DeleteMaterialResponseDto> deleteMaterial(String createStudyUserEmail,Integer studyNumber, Integer studyMaterialNumber);
     
+    ResponseEntity<? super PostMaterialCommentResponseDto> postMaterialComment(PostMaterialCommentRequestDto dto, Integer studyNumber ,String commentUserEmail ,String userEmail);
+    // ResponseEntity<? super PatchMaterialCommentResponseDto> patchMaterialComment(PatchMaterialCommentReqeuestDto dto, String commentUserEmail, String userEmail, Integer studyNumber);
+
     ResponseEntity<? super GetAttendanceInformationResponseDto> getAttendanceInformation(Integer studyNumber, String userEmail);
 
 }

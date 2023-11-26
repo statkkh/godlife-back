@@ -21,9 +21,11 @@ import com.godlife.godlifeback.dto.response.study.PostToDoListResponseDto;
 import com.godlife.godlifeback.dto.request.study.PatchMaterialRequestDto;
 import com.godlife.godlifeback.dto.request.study.PatchNoticeRequestDto;
 import com.godlife.godlifeback.dto.request.study.PatchToDoListRequestDto;
+import com.godlife.godlifeback.dto.request.study.PostMaterialCommentRequestDto;
 import com.godlife.godlifeback.dto.request.study.PostMaterialRequestDto;
 import com.godlife.godlifeback.dto.response.study.PatchNoticeResponseDto;
 import com.godlife.godlifeback.dto.response.study.PatchToDoListResponseDto;
+import com.godlife.godlifeback.dto.response.study.PostMaterialCommentResponseDto;
 import com.godlife.godlifeback.dto.response.study.PostMaterialResponseDto;
 import com.godlife.godlifeback.dto.response.study.DeleteMaterialResponseDto;
 import com.godlife.godlifeback.dto.response.study.DeleteNoticeResponseDto;
@@ -31,6 +33,7 @@ import com.godlife.godlifeback.dto.response.study.DeleteToDolistResponseDto;
 import com.godlife.godlifeback.dto.response.study.GetAttendanceInformationResponseDto;
 import com.godlife.godlifeback.dto.response.study.GetMaterialResponseDto;
 import com.godlife.godlifeback.entity.StudyEntity;
+import com.godlife.godlifeback.entity.StudyMaterialCommentEntity;
 import com.godlife.godlifeback.entity.StudyMaterialEntity;
 import com.godlife.godlifeback.entity.StudyNoticeEntity;
 import com.godlife.godlifeback.entity.StudyTodolistEntity;
@@ -38,7 +41,7 @@ import com.godlife.godlifeback.repository.StudyMaterialRepository;
 import com.godlife.godlifeback.repository.StudyNoticeRepository;
 import com.godlife.godlifeback.repository.StudyRepository;
 import com.godlife.godlifeback.repository.StudyToDoListRespository;
-// import com.godlife.godlifeback.repository.StudyUserListRepository;
+import com.godlife.godlifeback.repository.StudyMaterialCommentRepository;
 // import com.godlife.godlifeback.repository.UserAttendanceInformationRepository;
 import com.godlife.godlifeback.repository.UserRepository;
 import com.godlife.godlifeback.repository.resultSet.StudyMaterialListResultSet;
@@ -56,6 +59,7 @@ public class StudyServiceImplement implements StudyService{
     private final StudyToDoListRespository studyToDoListRespository;
 
     private final StudyMaterialRepository studyMaterialRepository;
+    private final StudyMaterialCommentRepository studyMaterialCommentRepository;
 
     private final StudyRepository studyRepository;
     private final UserRepository userRepository;
@@ -367,6 +371,27 @@ public class StudyServiceImplement implements StudyService{
         return DeleteMaterialResponseDto.success();        
     }    
 
+    @Override
+    public ResponseEntity<? super PostMaterialCommentResponseDto> postMaterialComment(PostMaterialCommentRequestDto dto, Integer studyNumber ,String commentUserEmail ,String userEmail) {
+        
+        try {
+            
+            boolean existedUser = userRepository.existsByUserEmail(userEmail);
+            if(!existedUser) return PostMaterialCommentResponseDto.notExistUser();
+
+            StudyEntity studyEntity = studyRepository.findByStudyNumber(studyNumber);
+            if(studyEntity == null) return PostMaterialCommentResponseDto.notExistUser();     
+            
+            StudyMaterialCommentEntity studyMaterialCommentEntity = new StudyMaterialCommentEntity(dto,commentUserEmail, studyNumber);
+            studyMaterialCommentRepository.save(studyMaterialCommentEntity);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return PostMaterialCommentResponseDto.success();
+    }
 
 
     @Override
@@ -390,5 +415,7 @@ public class StudyServiceImplement implements StudyService{
 
         return GetAttendanceInformationResponseDto.success(resultSets);
     }
+
+
 
 }
