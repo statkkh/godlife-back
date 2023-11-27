@@ -10,7 +10,7 @@ import com.godlife.godlifeback.common.object.MaterialListItem;
 import com.godlife.godlifeback.dto.response.ResponseCode;
 import com.godlife.godlifeback.dto.response.ResponseDto;
 import com.godlife.godlifeback.dto.response.ResponseMessage;
-import com.godlife.godlifeback.entity.StudyMaterialEntity;
+// import com.godlife.godlifeback.entity.StudyMaterialEntity;
 import com.godlife.godlifeback.repository.resultSet.StudyMaterialListResultSet;
 
 import lombok.Getter;
