@@ -39,7 +39,7 @@ public class GetToDoListResponseDto extends ResponseDto{
     }
 
     public static ResponseEntity<ResponseDto> notExistStudy(){
-        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_STUDY_ROOM, ResponseMessage.NOT_EXIST_STUDY_ROOM);
+        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_STUDY, ResponseMessage.NOT_EXIST_STUDY);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
 
