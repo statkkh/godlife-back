@@ -5,5 +5,4 @@ public interface StudyToDoListResultSet {
     int getStudyNumber();
     String getStudyListContent();
     boolean getStudyListCheck();
-    String getUserEmail();
 }
