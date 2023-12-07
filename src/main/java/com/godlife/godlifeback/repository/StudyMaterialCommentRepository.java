@@ -29,7 +29,7 @@ public interface StudyMaterialCommentRepository extends JpaRepository<StudyMater
         "WHERE SMC.study_material_number = ?1 ",
         nativeQuery = true
     )
-    List<StudyCommentListResultSet> findByMaterialList(Integer studyNumber);
+    List<StudyMaterialCommentListResultSet> findByMaterialList(Integer studyNumber);
 
     StudyMaterialCommentEntity findByStudyMaterialCommentNumber(Integer studyMaterialCommentNumber);
       
