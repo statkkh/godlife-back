@@ -30,7 +30,7 @@ public class StudyMaterialCommentEntity {
 
     private int studyMaterialNumber;
     private String userEmail;
-    private String studyMaterialComment;
+    private String studyMaterialCommentContent;
     private String studyMaterialCommentDatetime;
 
     public StudyMaterialCommentEntity(PostMaterialCommentRequestDto dto, String userEmail, Integer studyMaterialNumber){
@@ -48,7 +48,7 @@ public class StudyMaterialCommentEntity {
 
     public void patch(PatchMaterialCommentReqeuestDto dto){
 
-        this.studyMaterialComment = dto.getStudyMaterialCommentContent();
+        this.studyMaterialCommentContent = dto.getStudyMaterialCommentContent();
 
         Date now = Date.from(Instant.now());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
