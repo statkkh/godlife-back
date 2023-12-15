@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import com.godlife.godlifeback.dto.response.studyService.PostStudyUserListResponseDto;
+
 import com.godlife.godlifeback.dto.request.study.PatchNoticeRequestDto;
 import com.godlife.godlifeback.dto.request.study.PostMaterialRequestDto;
 
@@ -55,6 +58,16 @@ import lombok.RequiredArgsConstructor;
 public class StudyController {
     
     private final StudyService studyService;
+
+    @PostMapping("/{studyNumber}/user-list/{studyGrade}")
+    ResponseEntity<? super PostStudyUserListResponseDto> postStudyUserList(
+        @PathVariable("studyNumber") Integer studyNumber,
+        @PathVariable("studyGrade") String studyGrade,
+        @AuthenticationPrincipal String userEmail   
+    ) {
+        ResponseEntity<? super PostStudyUserListResponseDto> response = studyService.postStudyUserList(studyNumber, studyGrade, userEmail);
+        return response;
+    }
 
     @PostMapping("/{studyNumber}/notice")
     public ResponseEntity<? super PostNoticeResponseDto> postNotice(

@@ -9,6 +9,41 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.godlife.godlifeback.dto.response.ResponseDto;
+      
+                             
+import com.godlife.godlifeback.dto.request.studyService.notice.PostNoticeRequestDto;
+import com.godlife.godlifeback.dto.request.studyService.notice.PatchNoticeRequestDto;
+
+import com.godlife.godlifeback.dto.response.studyService.notice.GetStudyNoticeListResponseDto;
+import com.godlife.godlifeback.dto.response.studyService.notice.PostNoticeResponseDto;
+import com.godlife.godlifeback.dto.response.studyService.notice.PatchNoticeResponseDto;
+import com.godlife.godlifeback.dto.response.studyService.notice.DeleteNoticeResponseDto;
+
+import com.godlife.godlifeback.dto.request.studyService.todo.PostToDoListRequestDto;
+import com.godlife.godlifeback.dto.request.studyService.PatchToDoListRequestDto;
+
+import com.godlife.godlifeback.dto.response.studyService.todo.GetToDoListResponseDto;
+import com.godlife.godlifeback.dto.response.studyService.todo.PostToDoListResponseDto;
+import com.godlife.godlifeback.dto.response.studyService.todo.PatchToDoListResponseDto;
+import com.godlife.godlifeback.dto.response.studyService.todo.DeleteToDolistResponseDto;
+
+import com.godlife.godlifeback.dto.request.studyService.materialPostMaterialRequestDto;
+import com.godlife.godlifeback.dto.request.studyService.material.PatchMaterialRequestDto;
+
+import com.godlife.godlifeback.dto.response.studyService.material.GetMaterialResponseDto;
+import com.godlife.godlifeback.dto.response.studyService.material.PostMaterialResponseDto;
+import com.godlife.godlifeback.dto.response.studyService.material.PatchMaterialResponseDto;
+import com.godlife.godlifeback.dto.response.studyService.material.DeleteMaterialResponseDto;
+
+import com.godlife.godlifeback.dto.request.studyService.materialComment.PostMaterialCommentRequestDto;
+import com.godlife.godlifeback.dto.request.studyService.materialComment.PatchMaterialCommentReqeuestDto;
+
+
+import com.godlife.godlifeback.dto.response.studyService.materialCommentGetStudyMaterialCommentListResponseDto;
+import com.godlife.godlifeback.dto.request.studyService.materialCommentPatchStudyMaterialCommentRequestDto;
+import com.godlife.godlifeback.dto.response.studyService.materialComment.PostStudyMaterialCommentResponseDto;
+import com.godlife.godlifeback.dto.response.studyService.materialComment.DeleteStudyMaterialCommentResponseDto;
+
 
 import com.godlife.godlifeback.dto.request.studyService.notice.PostStudyNoticeRequestDto;
 import com.godlife.godlifeback.dto.request.studyService.notice.PatchStudyNoticeRequestDto;
@@ -60,6 +95,8 @@ import com.godlife.godlifeback.repository.StudyMaterialCommentRepository;
 
 
 import com.godlife.godlifeback.repository.UserRepository;
+
+import com.godlife.godlifeback.repository.resultSet.StudyMaterialListResultSet;
 import com.godlife.godlifeback.repository.resultSet.StudyNoticeListResultSet;
 import com.godlife.godlifeback.repository.resultSet.StudyToDoListResultSet;
 import com.godlife.godlifeback.repository.resultSet.StudyMaterialListResultSet;
@@ -392,6 +429,36 @@ public class StudyServiceImplement implements StudyService{
 
 
     @Override
+<<<<<<< HEAD
+    public ResponseEntity<? super GetStudyMaterialCommentListResponseDto> getMaterialCommentList(String userEmail,Integer studyNumber, Integer studyMaterialNumber) {
+
+        List<StudyMaterialCommentListResultSet> resultSets = new ArrayList<>();
+
+        try {
+          boolean existedUser = userRepository.existsByUserEmail(userEmail);
+          if(!existedUser) return  GetStudyMaterialCommentListResponseDto.notExistUser();
+
+
+          StudyEntity studyEntity = studyRepository.findByStudyNumber(studyNumber);
+          if( studyEntity == null) return GetStudyMaterialCommentListResponseDto.notExistStudy();
+
+          StudyMaterialEntity  studyMaterialEntity = studyMaterialRepository.findByStudyMaterialNumber(studyMaterialNumber);
+          if(studyMaterialEntity == null) return GetStudyMaterialCommentListResponseDto.notExistMaterial();
+
+          resultSets = studyMaterialCommentRepository.findByMaterialCommentList(studyMaterialNumber);
+
+        } catch(Exception exception){
+          exception.printStackTrace();
+          return ResponseDto.databaseError();  
+        }
+
+        return  GetStudyMaterialCommentListResponseDto.success(resultSets);
+
+    }
+
+    @Override
+    public ResponseEntity<? super PostMaterialCommentResponseDto> postMaterialComment(PostMaterialCommentRequestDto dto, Integer studyNumber ,String commentUserEmail ,String userEmail) {
+=======
     public ResponseEntity<? super GetStudyMaterialCommentListResponseDto> getMaterialCommentList(String userEmail,Integer studyNumber, Integer studyMaterialNumber) {
 
         List<StudyMaterialCommentListResultSet> resultSets = new ArrayList<>();
@@ -420,6 +487,7 @@ public class StudyServiceImplement implements StudyService{
 
     @Override
     public ResponseEntity<? super PostStudyMaterialCommentResponseDto> postMaterialComment(PostMaterialCommentRequestDto dto, Integer studyNumber ,String commentUserEmail ,String userEmail) {
+>>>>>>> 3bd9b62d4657b6b3faa6f1fb49de53da32dce1e2
         
         try {
             
@@ -444,9 +512,71 @@ public class StudyServiceImplement implements StudyService{
         return PostStudyMaterialCommentResponseDto.success();
     }
 
-
     @Override
     public ResponseEntity<? super PatchStudyMaterialCommentResponseDto> patchMaterialComment(PatchStudyMaterialCommentRequestDto dto, String userEmail, Integer studyNumber, Integer studyMaterialNumber) {
+
+      try {
+            UserEntity  userEntity = userRepository.findByUserEmail(userEmail);
+            if(userEntity == null) return PatchStudyMaterialCommentResponseDto.notExistUser();
+
+            StudyEntity studyEntity = studyRepository.findByStudyNumber(studyNumber);
+            if(studyEntity == null) return PatchStudyMaterialCommentResponseDto.notExistUser(); 
+          
+            StudyMaterialEntity  studyMaterialEntity = studyMaterialRepository.findByStudyMaterialNumber(studyMaterialNumber);            
+            if(studyMaterialEntity == null) return PatchStudyMaterialCommentResponseDto.notExistMaterial();        
+
+            StudyMaterialCommentEntity studyMaterialCommentEntity = studyMaterialCommentRepository.findByStudyMaterialCommentNumber(dto.getStudyMaterialCommentNumber());
+            if(studyMaterialCommentEntity == null) return PatchStudyMaterialCommentResponseDto.notExistMaterialCommment();
+
+            boolean equalWriter = studyMaterialCommentEntity.getUserEmail().equals(userEmail);
+            if(!equalWriter) return PatchStudyMaterialCommentResponseDto.noPermision();
+
+            
+            studyMaterialCommentEntity.patchMaterialComment(dto);
+            studyMaterialCommentRepository.save(studyMaterialCommentEntity);
+
+      } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();  
+      }
+      return PatchStudyMaterialCommentResponseDto.success();
+    }
+
+    @Override
+<<<<<<< HEAD
+    public ResponseEntity<? super DeleteStudyMaterialCommentResponseDto> deleteMaterialComment(String createStudyUserEmail,Integer studyNumber, Integer studyMaterialNumber,Integer studyMaterialCommentNumber) {
+
+        try {
+          
+          boolean existedUser = userRepository.existsByUserEmail(createStudyUserEmail);
+          if(!existedUser) return DeleteStudyMaterialCommentResponseDto.notExistUser();
+
+          StudyEntity studyEntity = studyRepository.findByStudyNumber(studyNumber);
+          if(studyEntity == null) return DeleteStudyMaterialCommentResponseDto.notExistUser(); 
+
+          StudyMaterialEntity  studyMaterialEntity = studyMaterialRepository.findByStudyMaterialNumber(studyMaterialNumber);            
+          if(studyMaterialEntity == null) return DeleteStudyMaterialCommentResponseDto.notExistMaterial();  
+          
+          StudyMaterialCommentEntity studyMaterialCommentEntity = studyMaterialCommentRepository.findByStudyMaterialCommentNumber(studyMaterialCommentNumber);
+          if(studyMaterialCommentEntity == null) return DeleteStudyMaterialCommentResponseDto.notExistComment();
+
+          boolean equalCreater = studyEntity.getCreateStudyUserEmail().equals(createStudyUserEmail);
+          if(!equalCreater) return DeleteStudyMaterialCommentResponseDto.noPermission();       
+          
+          studyMaterialCommentRepository.delete(studyMaterialCommentEntity);
+
+        } catch (Exception exception) {
+          exception.printStackTrace();
+          return ResponseDto.databaseError();  
+        }
+        return DeleteStudyMaterialCommentResponseDto.success();
+    }    
+
+    @Override
+    public ResponseEntity<? super GetAttendanceInformationResponseDto> getAttendanceInformation(Integer studyNumber,String userEmail) {
+=======
+    public ResponseEntity<? super PatchStudyMaterialCommentResponseDto> patchMaterialComment(PatchStudyMaterialCommentRequestDto dto, String userEmail, Integer studyNumber, Integer studyMaterialNumber) {
+>>>>>>> 3bd9b62d4657b6b3faa6f1fb49de53da32dce1e2
 
       try {
             UserEntity  userEntity = userRepository.findByUserEmail(userEmail);
@@ -504,8 +634,27 @@ public class StudyServiceImplement implements StudyService{
         return DeleteStudyMaterialCommentResponseDto.success();
     }
 
+    @Override
+    public ResponseEntity<? super PostStudyUserListResponseDto> postStudyUserList(Integer studyNumber, String userEmail,String studyGrade) {
 
+      try {
+        
+        boolean existedUser = userRepository.existsByUserEmail(userEmail);
+        if(!existedUser) return PostStudyUserListResponseDto.notExistUser();
 
+        StudyEntity studyEntity = studyRepository.findByStudyNumber(studyNumber);
+        if(studyEntity == null) return PostStudyUserListResponseDto.notExistUser();
+
+        StudyUserListEntity studyUserListEntity = new StudyUserListEntity(studyNumber,userEmail,studyGrade);
+        studyUserListRepository.save(studyUserListEntity);
+
+      } catch (Exception exception) {
+          exception.printStackTrace();
+          return ResponseDto.databaseError();  
+      }
+
+      return PostStudyUserListResponseDto.success();
+    }
 
 
 }
