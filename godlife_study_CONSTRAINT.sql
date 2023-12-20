@@ -9,22 +9,34 @@ CREATE TABLE `user` (
   `user_experience` INT NOT NULL DEFAULT 0 COMMENT '유저 경험치'
 );
 
+
+
 DROP TABLE user;
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-
+-- study_material_number
 CREATE TABLE `study_material` (
 	`study_material_number`	 INT PRIMARY KEY AUTO_INCREMENT COMMENT '스터디 자료 번호',
 	`study_number`	INT	NOT NULL	COMMENT '스터디 방 번호',
 	`study_material_name` VARCHAR(50)	NULL COMMENT '스터디 자료 이름',
-	`study_material_image_url` VARCHAR(500) NULL COMMENT '스터디 자료 이름',
+	`study_material_image_url` VARCHAR(500) NULL COMMENT '스터디 자료 이미지 URL',
 	`study_material_writer`	VARCHAR(50)	NOT NULL COMMENT '스터디 자료 작성자',
 	`study_material_datetime` DATETIME	NOT NULL	DEFAULT CURRENT_TIMESTAMP COMMENT '스터디 자료 업로드 일자',
     CONSTRAINT `fk_study_material_study_idx` FOREIGN KEY (study_number) REFERENCES study (study_number) 
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+ALTER TABLE study_material
+DROP FOREIGN KEY fk_study_material_study_idx;
+	
+ALTER TABLE study_material
+ADD CONSTRAINT fk_study_material_study_idx FOREIGN KEY (study_number)
+REFERENCES study (study_number)
+ON UPDATE CASCADE ON DELETE CASCADE;    
+    
+
 DROP TABLE study_material;
+
 
 CREATE TABLE `study_material_comment` (
 	`study_material_comment_number`	INT	PRIMARY KEY AUTO_INCREMENT	COMMENT '스터디 자료 코멘트 번호',
@@ -39,6 +51,15 @@ CREATE TABLE `study_material_comment` (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
+
+ALTER TABLE study_material_comment
+DROP FOREIGN KEY fk_study_material_comment_study_material_idx,
+DROP FOREIGN KEY fk_study_material_comment_user_idx;
+
+ALTER TABLE study_material_comment
+ADD CONSTRAINT `fk_study_material_comment_study_material_idx` FOREIGN KEY (study_material_number) REFERENCES study_material (study_material_number)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
 
 DROP TABLE study_material_comment;
 
@@ -55,6 +76,19 @@ CREATE TABLE `user_attendance_information` (
     ON UPDATE CASCADE    ON DELETE CASCADE
 );
 
+
+ALTER TABLE user_attendance_information
+DROP FOREIGN KEY fk_user_attendance_information_study_idx,
+DROP FOREIGN KEY fk_user_attendance_information_user_idx;
+
+ALTER TABLE user_attendance_information
+ADD CONSTRAINT fk_user_attendance_information_study_idx FOREIGN KEY (study_number)
+REFERENCES study (study_number)
+ON UPDATE CASCADE ON DELETE CASCADE,
+ADD CONSTRAINT fk_user_attendance_information_user_idx FOREIGN KEY (user_email)
+REFERENCES user (user_email)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
 DROP TABLE user_attendance_information;
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
@@ -69,6 +103,19 @@ CREATE TABLE `study_user_list` (
     ON UPDATE CASCADE  ON DELETE CASCADE
 );
 
+ALTER TABLE study_user_list
+DROP FOREIGN KEY fk_study_user_list_study_idx,
+DROP FOREIGN KEY fk_study_user_list_user_idx;
+
+ALTER TABLE study_user_list
+ADD CONSTRAINT fk_study_user_list_study_idx FOREIGN KEY (study_number)
+REFERENCES study (study_number)
+ON UPDATE CASCADE ON DELETE CASCADE,
+ADD CONSTRAINT fk_study_user_list_user_idx FOREIGN KEY (user_email)
+REFERENCES user (user_email)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+
 DROP TABLE study_user_list;
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
@@ -80,14 +127,14 @@ CREATE TABLE `study` (
 	`study_end_date`	DATETIME	NOT NULL COMMENT '스터디 종료일',
 	`study_personal`	INT	NOT NULL	DEFAULT 0 COMMENT '스터디 인원',
 	`study_category1`	VARCHAR(20)	NOT NULL COMMENT '스터디 카테고리1',
-	`study_category2`	VARCHAR(20)	NULL COMMENT '',
-	`study_category3`	VARCHAR(20)	NULL COMMENT '',
-	`study_public_check`	BOOLEAN	NOT NULL	DEFAULT true COMMENT '스터디 공개 구분',
+	`study_category2`	VARCHAR(20)	NULL COMMENT '스터디 카테고리2',
+	`study_category3`	VARCHAR(20)	NULL COMMENT '스터디 카테고리3',
+	`study_public_check`	BOOLEAN	NOT NULL DEFAULT true COMMENT '스터디 공개 구분',
 	`study_private_password`	VARCHAR(20)	NULL COMMENT '스터디 비공개 비밀번호',
 	`study_cover_image_url`	VARCHAR(255)	NULL COMMENT '스터디 커버 이미지 URL',
 	`study_next_start_datetime`	DATETIME	NULL COMMENT '다음 스터디 시작 시간',
 	`study_next_end_datetime`	DATETIME	NULL COMMENT '다음 스터디 종료 시간',
-	`study_total_day`	INT	NULL DEFAULT 0 COMMENT '총 스터디 일수',
+	`study_total_day`	INT NOT	NULL DEFAULT 0 COMMENT '총 스터디 일수',
 	`create_study_user_email`	VARCHAR(50)	NOT NULL COMMENT '방 생성 유저 이메일'
 );
 
@@ -103,6 +150,16 @@ CREATE TABLE `study_notice` (
     ON UPDATE CASCADE    ON DELETE CASCADE
 );
 
+ALTER TABLE study_notice
+DROP FOREIGN KEY fk_study_notice_study_idx;
+
+ALTER TABLE study_notice
+ADD CONSTRAINT fk_study_notice_study_idx FOREIGN KEY (study_number)
+REFERENCES study (study_number)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
+
+
 DROP TABLE study_notice;
 
 CREATE TABLE `study_todolist` (
@@ -113,6 +170,15 @@ CREATE TABLE `study_todolist` (
     CONSTRAINT `fk_study_todolist_study_idx` FOREIGN KEY (study_number) REFERENCES study (study_number)
     ON UPDATE CASCADE    ON DELETE CASCADE
 );
+
+ALTER TABLE study_todolist
+DROP FOREIGN KEY fk_study_todolist_study_idx;
+
+ALTER TABLE study_todolist
+ADD CONSTRAINT fk_study_todolist_study_idx FOREIGN KEY (study_number)
+REFERENCES study (study_number)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
 
 DROP TABLE study_todolist;
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
@@ -128,10 +194,49 @@ CREATE TABLE `study_chat` (
     ON UPDATE CASCADE  ON DELETE CASCADE    
 );
 
+ALTER TABLE study_chat
+DROP FOREIGN KEY fk_study_chat_study_idx,
+DROP FOREIGN KEY fk_study_chat_user_idx;
+
+ALTER TABLE study_chat
+ADD CONSTRAINT fk_study_chat_study_idx FOREIGN KEY (study_number)
+REFERENCES study (study_number)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE study_chat
+ADD CONSTRAINT fk_study_chat_user_idx FOREIGN KEY (user_email)
+REFERENCES user (user_email)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+
 DROP TABLE study_chat;
 
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --	 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 DROP TABLE user_todolist;
+
+CREATE TABLE `user_todolist` (
+	`user_list_number`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`user_email`	VARCHAR(50)	NOT NULL,
+	`user_list_datetime`	DATETIME	NULL,
+	`user_list_content`	VARCHAR(255)	NULL,
+	`user_list_check`	BOOLEAN	NOT NULL	DEFAULT false
+);
+
+
+
 
 DROP TABLE email_transfer_code;
 
 -- ALTER TABLE study_notice ADD 
+-- noticeContent
+
+-- JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+
+-- email1@email.com
+-- eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlbWFpbDFAZW1haWwuY29tIiwiaWF0IjoxNTE2MjM5MDIyfQ.KZdPhrMMTOvlknCsnfAPrvaNYH-NxmheC3GBIv-39EU
+	
+-- email2@email.com
+-- eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlbWFpbDJAZW1haWwuY29tIiwiaWF0IjoxNTE2MjM5MDIyfQ.eOau8g8lr9cMZSMBiRejts4uT1dBadgRqk-PISXEYxs
+
+-- email3@email.com
+-- 
